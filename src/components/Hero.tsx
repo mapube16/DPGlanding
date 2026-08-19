@@ -15,7 +15,9 @@ export default function Hero() {
   useEffect(() => {
     const el = ref.current
     if (!el) return
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    // Antes se salía aquí con "reducir movimiento" y el cielo se quedaba en día
+    // para siempre. Un cambio de color ligado al scroll no marea; lo que sí
+    // puede marear es el recorrido del astro, y eso se desactiva en el CSS.
 
     let frame = 0
     const actualizar = () => {

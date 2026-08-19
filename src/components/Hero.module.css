@@ -124,15 +124,12 @@
   color: color-mix(in srgb, #162025, #ccddf7 calc(clamp(0, (var(--t) - 0.55) * 2.6, 1) * 100%));
 }
 
-/* Sin scroll-driven: se queda el cielo de día, que es un estado válido. */
+/* Con "reducir movimiento" el cielo sigue cambiando de día a noche —es color,
+   no movimiento— pero el astro se queda quieto en lugar de recorrer el cielo. */
 @media (prefers-reduced-motion: reduce) {
-  .hero {
-    height: auto;
-  }
-  .sticky {
-    position: static;
-    height: auto;
-    min-height: 100vh;
+  .astro {
+    left: 12%;
+    top: 42%;
   }
 }
 
