@@ -1,0 +1,225 @@
+/* Nodos 162:696 / 162:769. El anillo mide 1100x1100 y arranca en x=587, y=-188
+   del lienzo de 1440x724: desborda la sección por arriba y por abajo. */
+.aliados {
+  position: relative;
+  min-height: 724px;
+  padding: 120px 0;
+  display: flex;
+  align-items: center;
+  background: var(--cream);
+  overflow: hidden;
+}
+
+.col {
+  position: relative;
+  z-index: 3;
+  width: 612px;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 44px;
+  align-items: flex-start;
+}
+.col h2 {
+  margin: 0;
+  font-size: 58px;
+  line-height: 1;
+  color: var(--yale);
+}
+.col > p {
+  margin: 0;
+  width: 445px;
+  max-width: 100%;
+  font-size: 20px;
+  line-height: 1.45;
+  color: var(--carbon);
+}
+.claim {
+  width: 398px;
+  max-width: 100%;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--yale);
+}
+.claim strong {
+  font-weight: 600;
+  color: var(--verde-oscuro);
+}
+/* La aseguradora destacada entra con un fundido corto al cambiar cada 5s. */
+.nombre {
+  display: inline-block;
+  animation: entra 400ms ease;
+}
+@keyframes entra {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* --- Anillo --- */
+.ring {
+  position: absolute;
+  left: 40.8%;
+  top: -26%;
+  width: 76.4%;
+  aspect-ratio: 1;
+  z-index: 2;
+}
+
+.orbita {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -0.5px;
+  margin-top: -0.5px;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(18, 80, 119, 0.12);
+  border-radius: 50%;
+  animation-name: girar;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+.derecha {
+  animation-name: girar;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+.izquierda {
+  animation-name: girarInverso;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+@keyframes girar {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+@keyframes girarInverso {
+  to {
+    transform: translate(-50%, -50%) rotate(-360deg);
+  }
+}
+
+/* Capa a tamaño completo de la órbita, girada al ángulo del logo. */
+.slot {
+  position: absolute;
+  inset: 0;
+}
+/* El logo se ancla arriba (sobre la circunferencia) y se le quita el ángulo. */
+.pin {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 84px;
+  height: 84px;
+  margin: -42px 0 0 -42px;
+}
+
+/* Contra-rotación: mismo periodo, sentido opuesto, para que el logo no gire. */
+.contra {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #fff;
+  border: 3px solid #fff;
+  box-shadow: 0 8px 20px rgba(8, 47, 83, 0.14);
+  transition: border-color 300ms ease, box-shadow 300ms ease, transform 300ms ease;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+.contraDerecha {
+  animation-name: contraDerecha;
+}
+.contraIzquierda {
+  animation-name: contraIzquierda;
+}
+@keyframes contraDerecha {
+  to {
+    rotate: 360deg;
+  }
+}
+@keyframes contraIzquierda {
+  to {
+    rotate: -360deg;
+  }
+}
+.contra img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+/* Resalte cada 5s (nota 167:1614). */
+.destacado {
+  border-color: var(--verde-claro);
+  box-shadow: 0 0 0 4px rgba(155, 191, 29, 0.35), 0 10px 26px rgba(8, 47, 83, 0.2);
+  scale: 1.12;
+}
+
+.core {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 18%;
+  aspect-ratio: 1;
+  background: #fff;
+  border: 3px solid rgba(24, 153, 214, 0.5);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  padding: 3.5%;
+  box-shadow: 0 14px 34px rgba(8, 47, 83, 0.12);
+  z-index: 2;
+}
+.core img {
+  width: 100%;
+  height: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orbita,
+  .contra {
+    animation: none !important;
+  }
+}
+
+@media (max-width: 1100px) {
+  .aliados {
+    min-height: 0;
+    padding: 72px 0;
+    flex-direction: column;
+    gap: 48px;
+  }
+  .col {
+    width: auto;
+  }
+  .col h2 {
+    font-size: clamp(32px, 7vw, 58px);
+  }
+  .col > p,
+  .claim {
+    width: auto;
+  }
+  /* El anillo pasa a flujo normal y se encoge para caber. */
+  .ring {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: min(100%, 460px);
+    margin-inline: auto;
+    order: 2;
+  }
+  .contra {
+    width: 52px;
+    height: 52px;
+    border-width: 2px;
+  }
+}

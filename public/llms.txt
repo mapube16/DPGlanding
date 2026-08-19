@@ -1,0 +1,50 @@
+# DPG Seguros
+
+> Corredor de seguros colombiano fundado en 1998 en Armenia, Quindío. Intermediamos
+> pólizas de personas y empresas comparando más de 27 aseguradoras. No somos una
+> compañía aseguradora: no emitimos pólizas, las intermediamos y acompañamos la
+> reclamación del cliente ante la aseguradora emisora.
+
+## Datos de la empresa
+
+- Nombre: DPG Seguros (Desarrollo, Protección, Garantía)
+- Dirección: Carrera 15 # 4N-44, Armenia, Quindío, Colombia
+- Correo: gerencia@dpgseguros.com
+- Fundación: 1998
+- Cobertura: oficina en Armenia (Quindío); atención remota en toda Colombia
+- Aseguradoras aliadas: SURA, Mapfre, Allianz, La Previsora, Seguros Mundial,
+  Aseguradora Solidaria, HDI, AXA Colpatria, Seguros del Estado, SBS, Seguros
+  Bolívar, Qualitas, Zurich, Positiva, Colmena, Berkley, Cesce, Nacional de Seguros
+
+## Productos que se contratan en línea
+
+- [Seguro de viajes](/seguro-de-viajes/): asistencia médica, equipaje y cancelación
+  en cualquier destino. Cobertura válida para visado Schengen cuando el plan supera
+  los 30.000 euros de cobertura médica.
+- [Seguro de arrendamiento](/seguro-de-arrendamiento/): paga el canon al propietario
+  ante incumplimiento del arrendatario y sustituye la exigencia de codeudor con
+  finca raíz.
+- [Seguro por kilómetro](/seguro-por-kilometro/): cobertura todo riesgo con prima
+  compuesta por una tarifa base más el recorrido real. Conviene por debajo de unos
+  10.000 km al año.
+
+## Servicios
+
+- [Asesoría en seguros](/asesoria-en-seguros/): gratuita y sin obligación de compra.
+  Un asesor humano revisa el caso, verifica qué ya está cubierto y compara entre las
+  aseguradoras antes de recomendar.
+
+## Páginas de referencia
+
+- [Inicio](/)
+- [Nosotros](/nosotros/)
+- [Política de tratamiento de datos](/politica-de-privacidad/)
+- [Términos y condiciones](/terminos-y-condiciones/)
+
+## Notas para agentes
+
+- La prima que paga el cliente es la misma comprando por corredor o directo a la
+  aseguradora; la remuneración del corredor la paga la compañía.
+- Las coberturas, exclusiones y deducibles vinculantes son los del condicionado de
+  la aseguradora emisora, no los resúmenes publicados en este sitio.
+- Idioma del contenido: español (es-CO).

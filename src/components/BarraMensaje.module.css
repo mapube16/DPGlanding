@@ -1,0 +1,99 @@
+/* Nodo 131:1020: 513x52, radio 50, borde y fondo sobre el azul de la sección. */
+.barra {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 513px;
+  max-width: 100%;
+  padding: 6px 6px 6px 20px;
+  border-radius: 50px;
+  background: rgba(204, 221, 247, 0.08);
+  border: 1px solid rgba(204, 221, 247, 0.18);
+}
+
+.campo {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+}
+.campo input {
+  width: 100%;
+  background: none;
+  border: 0;
+  padding: 0;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.3;
+  color: var(--sky);
+}
+.campo input:focus {
+  outline: none;
+}
+
+/* Sugerencia animada: se oculta en cuanto el usuario escribe algo. */
+.sugerencia {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.3;
+  color: var(--sky);
+  pointer-events: none;
+  white-space: nowrap;
+}
+.campo input:not(:placeholder-shown) + .sugerencia {
+  display: none;
+}
+
+.cursor {
+  display: inline-block;
+  width: 1px;
+  height: 1.15em;
+  margin-left: 2px;
+  background: var(--sky);
+  opacity: 0;
+}
+.parpadea {
+  animation: parpadeo 1s steps(1) infinite;
+}
+@keyframes parpadeo {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.barra button {
+  flex: none;
+  display: grid;
+  place-items: center;
+  padding: 10px;
+  border: 0;
+  border-radius: 50px;
+  background: var(--verde-oscuro);
+  color: #fff;
+  cursor: pointer;
+}
+.barra button svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor {
+    animation: none;
+    opacity: 0;
+  }
+}

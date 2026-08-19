@@ -1,0 +1,189 @@
+/* Nodos 162:878 / 162:1102. */
+.contacto {
+  padding: 120px 0;
+  background: linear-gradient(135deg, #1797d4 0%, #12537b 60%, #0d3a5c 100%);
+  color: #fff;
+  overflow: hidden;
+}
+.grid {
+  display: grid;
+  grid-template-columns: 515px 575px;
+  justify-content: space-between;
+  gap: 110px;
+  align-items: start;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  align-items: flex-start;
+}
+.title {
+  margin: 0;
+  font-size: 58px;
+  line-height: 1;
+  color: var(--cream);
+}
+.lead {
+  margin: 0;
+  width: 340px;
+  max-width: 100%;
+  font-size: 20px;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.9);
+}
+.direct {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+}
+.direct a {
+  color: #fff;
+  font-weight: 600;
+  font-size: 16px;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  justify-self: start;
+}
+.art {
+  width: 100%;
+  max-width: 515px;
+  height: auto;
+}
+
+/* --- Tarjeta del formulario --- */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  align-items: center;
+  background: #fff;
+  border-radius: 40px;
+  padding: 40px 30px;
+  color: var(--carbon);
+  box-shadow: 0 4px 11.9px rgba(18, 80, 119, 0.14);
+}
+.formTitle {
+  margin: 0;
+  width: 100%;
+  font-size: 38px;
+  line-height: 1;
+  color: var(--yale);
+  text-align: center;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+.campo label {
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--verde-oscuro);
+}
+.campo input,
+.campo textarea {
+  width: 100%;
+  font-family: inherit;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--yale);
+  background: rgba(204, 221, 247, 0.08);
+  border: 1px solid rgba(18, 80, 119, 0.2);
+  border-radius: 16px;
+  padding: 16px 20px;
+}
+.campo input::placeholder,
+.campo textarea::placeholder {
+  color: rgba(18, 80, 119, 0.6);
+  opacity: 1;
+}
+.campo textarea {
+  height: 124px;
+  resize: vertical;
+}
+
+.row {
+  display: flex;
+  gap: 28px;
+  width: 100%;
+}
+.row > * {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.form button[type='submit'] {
+  gap: 10px;
+}
+.form button[disabled] {
+  opacity: 0.6;
+  cursor: progress;
+}
+.form button svg {
+  width: 24px;
+  height: 24px;
+}
+
+.consent {
+  margin: 0;
+  width: 100%;
+  font-size: 13px;
+  color: rgba(18, 80, 119, 0.7);
+}
+.consent a {
+  color: var(--azul-oscuro);
+}
+
+.status:empty {
+  display: none;
+}
+.status {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--yale);
+  text-align: center;
+}
+
+/* Honeypot: fuera de pantalla, nunca display:none (algunos bots lo detectan). */
+.hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+@media (max-width: 1100px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 56px;
+  }
+  .title {
+    font-size: clamp(32px, 7vw, 58px);
+  }
+  .lead {
+    width: auto;
+  }
+}
+@media (max-width: 620px) {
+  .row {
+    flex-direction: column;
+    gap: 28px;
+  }
+  .form {
+    padding: 28px 22px;
+    border-radius: 28px;
+  }
+  .formTitle {
+    font-size: 30px;
+  }
+}

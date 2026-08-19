@@ -1,0 +1,135 @@
+/* Nodo 192:348. */
+.footer {
+  background: var(--navy);
+  color: #fff;
+  padding: 120px 0 0;
+}
+
+.inner {
+  display: flex;
+  gap: 42px;
+  align-items: flex-start;
+}
+
+.brand {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: flex-start;
+}
+.brand img {
+  width: 245px;
+  height: auto;
+}
+.brand p {
+  margin: 0;
+  width: 315px;
+  max-width: 100%;
+  font-size: 18px;
+  line-height: 1.45;
+  color: var(--sky);
+}
+.gbp {
+  color: var(--verde-claro);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.col {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-start;
+}
+.col h2 {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--cream);
+  white-space: nowrap;
+}
+.col ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0;
+}
+.col a,
+.brand a {
+  color: var(--sky);
+  font-size: 18px;
+  line-height: 1.45;
+  text-decoration: none;
+}
+.col a:hover,
+.brand a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* Datos de contacto: icono de 24px + texto, filas separadas 6px. */
+.contacto {
+  font-style: normal;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.dato {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.dato svg {
+  width: 24px;
+  height: 24px;
+  flex: none;
+  color: var(--sky);
+}
+
+.legal {
+  margin-top: 72px;
+  border-top: 1px solid rgba(204, 221, 247, 0.16);
+}
+.legal p {
+  width: min(100% - 48px, var(--max));
+  margin: 0 auto;
+  padding: 24px 0;
+  font-size: 13px;
+  color: rgba(204, 221, 247, 0.7);
+}
+.legal a {
+  color: rgba(204, 221, 247, 0.9);
+}
+
+@media (max-width: 1100px) {
+  .footer {
+    padding-top: 72px;
+  }
+  .inner {
+    flex-wrap: wrap;
+    gap: 40px;
+  }
+  .brand {
+    flex: 1 1 100%;
+  }
+  .col {
+    flex: 1 1 220px;
+  }
+}
+@media (max-width: 560px) {
+  .col,
+  .col h2,
+  .col a,
+  .brand p {
+    font-size: 16px;
+  }
+  .dato {
+    align-items: flex-start;
+  }
+}

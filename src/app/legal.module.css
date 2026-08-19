@@ -1,0 +1,34 @@
+.legal {
+  max-width: 76ch;
+  padding: 40px 0 96px;
+}
+.legal h1 {
+  font-size: clamp(30px, 4vw, 46px);
+  color: var(--yale);
+  margin-bottom: 12px;
+}
+.updated {
+  font-size: 14px;
+  color: #5c7280;
+  margin-bottom: 40px;
+}
+.legal h2 {
+  font-size: 22px;
+  color: var(--yale);
+  margin: 36px 0 12px;
+}
+.legal p,
+.legal li {
+  font-size: 16px;
+  line-height: 1.65;
+}
+.legal ul {
+  padding-left: 22px;
+  display: grid;
+  gap: 8px;
+  margin-bottom: 1em;
+}
+.legal a {
+  color: var(--azul-oscuro);
+  font-weight: 700;
+}

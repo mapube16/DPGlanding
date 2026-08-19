@@ -1,0 +1,160 @@
+/* Nodo 59:426. Tipografías: H1 72px Qlassik leading .95 w-673; bajada 20px
+   Encode leading 1.3 w-378. */
+.hero {
+  --t: 0; /* progreso del scroll 0 (día) → 1 (noche), lo escribe Hero.tsx */
+  position: relative;
+  height: 260vh;
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  min-height: 640px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: clamp(56px, 15vh, 170px) 24px 0;
+}
+
+/* Tres cielos apilados; la opacidad de cada uno sale de --t. */
+.cielo {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.dia {
+  background: linear-gradient(180deg, #9ad5eb 0%, #bfe3e2 55%, #e7ecd2 100%);
+  opacity: clamp(0, calc(1 - var(--t) * 2), 1);
+}
+.tarde {
+  background: linear-gradient(180deg, #7fb6d9 0%, #f0c48c 62%, #f6d9a8 100%);
+  opacity: clamp(0, calc(1 - 2 * max(calc(var(--t) - 0.5), calc(0.5 - var(--t)))), 1);
+}
+.noche {
+  background: linear-gradient(180deg, #06203c 0%, #0d3d63 60%, #1e5878 100%);
+  opacity: clamp(0, calc(var(--t) * 2 - 1), 1);
+}
+
+/* Astro: viaja de izquierda a derecha y baja al atardecer. Sol → luna. */
+.astro {
+  position: absolute;
+  z-index: 1;
+  left: calc(12% + 66% * var(--t));
+  top: calc(42% + 16% * var(--t) - 36% * var(--t) * var(--t));
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    #fffdf2 38%,
+    rgba(255, 253, 242, 0.75) 55%,
+    rgba(255, 253, 242, 0) 72%
+  );
+  filter: hue-rotate(calc(var(--t) * -25deg)) saturate(calc(1 + var(--t)));
+}
+
+.estrellas {
+  position: absolute;
+  inset: 0 0 40% 0;
+  z-index: 1;
+  opacity: clamp(0, calc(var(--t) * 2 - 1.1), 0.85);
+  background-image:
+    radial-gradient(2px 2px at 12% 30%, #fff, transparent),
+    radial-gradient(2px 2px at 22% 62%, #fff, transparent),
+    radial-gradient(2px 2px at 36% 20%, #fff, transparent),
+    radial-gradient(2px 2px at 44% 70%, #fff, transparent),
+    radial-gradient(2px 2px at 55% 34%, #fff, transparent),
+    radial-gradient(1px 1px at 62% 14%, #fff, transparent),
+    radial-gradient(2px 2px at 71% 52%, #fff, transparent),
+    radial-gradient(1px 1px at 84% 26%, #fff, transparent),
+    radial-gradient(2px 2px at 92% 60%, #fff, transparent),
+    radial-gradient(1px 1px at 6% 52%, #fff, transparent);
+}
+
+.paisaje {
+  position: absolute;
+  left: 50%;
+  /* Como en el diseño: el paisaje arranca al 32,5% de la altura (y=333 de 1024)
+     y conserva su proporción. Recortarlo lo hacía zoom sobre la casa. */
+  top: 32.5%;
+  transform: translateX(-50%);
+  width: 100%;
+  min-width: 1120px;
+  height: auto;
+  z-index: 2;
+  pointer-events: none;
+  filter: brightness(calc(1 - 0.55 * var(--t))) saturate(calc(1 - 0.5 * var(--t)))
+    contrast(calc(1 + 0.1 * var(--t)));
+}
+/* Veladura fría sobre el paisaje al anochecer. */
+.velo {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 32.5%;
+  bottom: 0;
+  z-index: 3;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(10, 40, 80, 0.55) 0%, rgba(6, 26, 56, 0.75) 100%);
+  opacity: clamp(0, calc(var(--t) * 1.6 - 0.6), 1);
+}
+
+.content {
+  position: relative;
+  z-index: 4;
+  text-align: center;
+  max-width: 673px;
+}
+
+.content h1 {
+  font-size: clamp(38px, 5.6vw, 72px);
+  line-height: 0.95;
+  color: color-mix(in srgb, #125077, #eaf4ff calc(clamp(0, (var(--t) - 0.55) * 2.6, 1) * 100%));
+  margin-bottom: 24px;
+}
+
+.lead {
+  width: 378px;
+  max-width: 100%;
+  margin: 0 auto 32px;
+  font-size: 20px;
+  line-height: 1.3;
+  color: color-mix(in srgb, #162025, #ccddf7 calc(clamp(0, (var(--t) - 0.55) * 2.6, 1) * 100%));
+}
+
+/* Sin scroll-driven: se queda el cielo de día, que es un estado válido. */
+@media (prefers-reduced-motion: reduce) {
+  .hero {
+    height: auto;
+  }
+  .sticky {
+    position: static;
+    height: auto;
+    min-height: 100vh;
+  }
+}
+
+@media (max-width: 700px) {
+  .hero {
+    height: 220vh;
+  }
+  .sticky {
+    min-height: 560px;
+  }
+  .paisaje {
+    top: 38%;
+    min-width: 760px;
+  }
+  .velo {
+    top: 38%;
+  }
+  .astro {
+    width: 80px;
+    height: 80px;
+  }
+  .lead {
+    font-size: 18px;
+  }
+}
