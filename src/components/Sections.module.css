@@ -124,7 +124,10 @@
   width: 455px;
   z-index: 2;
 }
-.ariaArt img {
+/* El SVG va incrustado (AriaSaluda), no como <img>: sin width/height propios,
+   escala con el viewBox igual que lo hacía la imagen. */
+.ariaArt img,
+.ariaArt svg {
   width: 100%;
   height: auto;
   display: block;

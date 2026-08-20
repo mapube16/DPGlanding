@@ -5,6 +5,8 @@ import Badge from './Badge'
 import Carrusel from './Carrusel'
 import BarraMensaje from './BarraMensaje'
 import AutoCiclo from './AutoCiclo'
+import AriaSaluda from './AriaSaluda'
+import { leerSvg } from '@/lib/svg'
 import { PAGES, NAP, BRAND } from '@/lib/site'
 import { PRODUCTS, RAZONES, SME, type Product } from '@/lib/content'
 import s from './Sections.module.css'
@@ -32,15 +34,14 @@ export function Aria() {
         </div>
       </div>
 
-      <div className={s.ariaArt}>
-        <Image
-          src="/img/aria/aria-asistente-virtual-dpg-seguros.svg"
-          alt="Aria, la asistente de DPG Seguros, saludando"
-          width={645}
-          height={973}
-          priority
-        />
-      </div>
+      {/* El SVG va incrustado, no en un <img>, para que GSAP pueda mover el
+          brazo. Se lee en build (export estático), así que sigue estando en el
+          HTML desde el primer pintado. */}
+      <AriaSaluda
+        className={s.ariaArt}
+        etiqueta="Aria, la asistente de DPG Seguros, saludando"
+        svg={leerSvg('img/aria/aria-asistente-virtual-dpg-seguros.svg')}
+      />
 
       <Link className={`${s.bubble} ${s.b1}`} href={PAGES.nosotros.path}>
         ¿Qué es DPG?
