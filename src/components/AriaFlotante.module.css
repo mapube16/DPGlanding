@@ -192,11 +192,3 @@
     font-size: 14px;
   }
 }
-
-@media (prefers-reduced-motion: reduce) {
-  .flotante,
-  .burbuja p {
-    transition: none;
-    animation: none;
-  }
-}

@@ -16,7 +16,9 @@
 
 /* ------------------------------------------------------------------ Aria -- */
 /* Medidas de get_design_context sobre el nodo 162:421. El lienzo del diseño es
-   de 1440x665; las posiciones absolutas se pasan a % para que escale. */
+   de 1440x665 CENTRADO: las posiciones absolutas se anclan al centro con
+   calc(50% + (x - 720)px). Con % del viewport todo se corría en pantallas
+   anchas. */
 .aria {
   position: relative;
   min-height: 665px;
@@ -101,8 +103,8 @@
 /* Halo difuminado detrás de la ilustración. */
 .ariaGlow {
   position: absolute;
-  left: 58.1%;
-  top: 17%;
+  right: 129px;
+  top: 113px;
   width: 474px;
   height: 474px;
   border-radius: 410px;
@@ -111,22 +113,20 @@
   pointer-events: none;
   z-index: 1;
 }
-/* En el diseño la ilustración vive en un marco de 560x792 anclado en top:-27
-   y recortado por la sección, no a sangre completa. */
+/* El SVG es el dibujo recortado (capa de 454.6x686.2 del marco 162:428). Se
+   ancla al borde DERECHO con el margen del diseño (1440-842-455=143): a 1440px
+   es idéntico al Figma y en pantallas anchas acompaña el borde en vez de
+   quedarse flotando lejos. La sección lo recorta por abajo, como en el diseño. */
 .ariaArt {
   position: absolute;
-  left: 58.7%;
-  top: -27px;
-  width: 560px;
-  height: 792px;
-  overflow: hidden;
+  right: 143px;
+  top: 48px;
+  width: 455px;
   z-index: 2;
 }
 .ariaArt img {
   width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: top center;
+  height: auto;
   display: block;
 }
 
@@ -149,16 +149,16 @@
   text-decoration: none;
 }
 .b1 {
-  left: 57%;
-  top: 18.6%;
+  right: 462px;
+  top: 124px;
 }
 .b2 {
-  left: 82.9%;
-  top: 39%;
+  right: 105px;
+  top: 259px;
 }
 .b3 {
-  left: 59.9%;
-  top: 75%;
+  right: 394px;
+  top: 499px;
 }
 
 /* ------------------------------------------------------------- Productos -- */
@@ -398,11 +398,14 @@
 .asesoriaCol p strong {
   font-weight: 600;
 }
+/* El SVG es el recorte visible del dibujo dentro del marco 186:1506 (zona
+   x 179→1097, y 133→776, escala 1.4075): mostrado a 918px cae exactamente
+   donde el Figma lo pinta. A 1097px (el ancho del marco) quedaba gigante. */
 .asesoriaArt {
   position: absolute;
-  left: 25%;
-  top: -14.3%;
-  width: 76.2%;
+  right: -18px;
+  top: 38px;
+  width: 918px;
   z-index: 1;
   pointer-events: none;
 }
@@ -499,7 +502,7 @@
 .leads {
   display: grid;
   justify-items: center;
-  max-width: 486px;
+  max-width: 386px;
 }
 .porqueLead {
   grid-area: 1 / 1;
@@ -672,9 +675,14 @@
 }
 .igTag {
   padding: 10px 20px;
-  border: 2px solid #ffd600;
+  border: 2px solid transparent;
   border-radius: 50px;
-  background: radial-gradient(circle at 6% 180%, #ffd600 0%, #ffa800 12.5%, #ff7a00 25%, #ff6b0d 28.1%, #ff5c1a 31.3%, #ff3d35 37.5%, #ff1f4f 43.8%, #ff0f5c 46.9%, #ff0069 50%, #e90097 62.3%, #d300c5 74.5%, #bc0ed2 80.9%, #a51ce0 87.3%, #7638fa 100%);
+  /* Nodo 162:804: interior con el radial IG al 35% sobre navy; el anillo es el
+     mismo radial a plena opacidad (no amarillo sólido: se ve púrpura a la derecha). */
+  background:
+    radial-gradient(195px at 10px 92px, rgba(255, 214, 0, 0.35) 0%, rgba(255, 168, 0, 0.35) 12.5%, rgba(255, 122, 0, 0.35) 25%, rgba(255, 107, 13, 0.35) 28.1%, rgba(255, 92, 26, 0.35) 31.3%, rgba(255, 61, 53, 0.35) 37.5%, rgba(255, 31, 79, 0.35) 43.8%, rgba(255, 15, 92, 0.35) 46.9%, rgba(255, 0, 105, 0.35) 50%, rgba(233, 0, 151, 0.35) 62.3%, rgba(211, 0, 197, 0.35) 74.5%, rgba(188, 14, 210, 0.35) 80.9%, rgba(165, 28, 224, 0.35) 87.3%, rgba(118, 56, 250, 0.35) 100%) padding-box,
+    linear-gradient(var(--navy), var(--navy)) padding-box,
+    radial-gradient(195px at 10px 92px, #ffd600 0%, #ffa800 12.5%, #ff7a00 25%, #ff6b0d 28.1%, #ff5c1a 31.3%, #ff3d35 37.5%, #ff1f4f 43.8%, #ff0f5c 46.9%, #ff0069 50%, #e90097 62.3%, #d300c5 74.5%, #bc0ed2 80.9%, #a51ce0 87.3%, #7638fa 100%) border-box;
   color: var(--cream);
   font-size: 12px;
   font-weight: 700;
@@ -705,7 +713,7 @@
   height: 50px;
   padding: 14px 28px;
   border-radius: 50px;
-  background: radial-gradient(circle at 6% 255%, #ffd600 0%, #ffa800 12.5%, #ff7a00 25%, #ff6b0d 28.1%, #ff5c1a 31.3%, #ff3d35 37.5%, #ff1f4f 43.8%, #ff0f5c 46.9%, #ff0069 50%, #e90097 62.3%, #d300c5 74.5%, #bc0ed2 80.9%, #a51ce0 87.3%, #7638fa 100%);
+  background: radial-gradient(292px at 17px 128px, #ffd600 0%, #ffa800 12.5%, #ff7a00 25%, #ff6b0d 28.1%, #ff5c1a 31.3%, #ff3d35 37.5%, #ff1f4f 43.8%, #ff0f5c 46.9%, #ff0069 50%, #e90097 62.3%, #d300c5 74.5%, #bc0ed2 80.9%, #a51ce0 87.3%, #7638fa 100%);
   color: var(--cream);
   text-decoration: none;
   font-size: 16px;
@@ -718,73 +726,109 @@
   height: 24px;
 }
 
-/* Tira de película: los reels con perforaciones arriba y abajo. */
+/* Tira de película (nodo 162:783): caja oscura de 552px anclada al lienzo de
+   1440 (x=411), con perforaciones y las tarjetas 273:363 centradas. */
 .marquesina {
   position: absolute;
-  left: 28.5%;
-  top: 8.6%;
-  width: 71.5%;
-  padding: 36px 0;
+  left: calc(50% - 309px);
+  top: 57px;
+  /* La tira termina en el borde del lienzo de 1440, no del viewport: en
+     pantallas anchas toda la composición queda centrada y el fundido derecho
+     la disuelve en navy en vez de dejarla pegada al borde. */
+  right: calc(50% - 720px);
+  height: 552px;
+  padding: 56px 0;
   display: flex;
-  gap: 14px;
+  gap: 20px;
   z-index: 1;
   overflow: hidden;
-  mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 100%);
+  background: #021f2d;
 }
 .reels {
   list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
-  gap: 14px;
+  gap: 20px;
   flex: none;
   animation: desliza 42s linear infinite;
 }
 @keyframes desliza {
   to {
-    transform: translateX(calc(-100% - 14px));
+    transform: translateX(calc(-100% - 20px));
   }
 }
 .marquesina:hover .reels {
   animation-play-state: paused;
 }
-@media (prefers-reduced-motion: reduce) {
-  .reels {
-    animation: none;
-  }
-}
+/* Perforaciones (Line 13/14): guiones navy de 17px cada 32px, 16px de alto. */
 .marquesina::before,
 .marquesina::after {
   content: '';
   position: absolute;
-  left: -10%;
-  width: 130%;
-  height: 14px;
-  background: repeating-linear-gradient(
-    90deg,
-    rgba(204, 221, 247, 0.22) 0 10px,
-    transparent 10px 26px
-  );
+  left: 0;
+  right: 0;
+  height: 16px;
+  background: repeating-linear-gradient(90deg, var(--navy) 0 17px, transparent 17px 32px);
+  z-index: 2;
 }
 .marquesina::before {
-  top: 8px;
-  z-index: 2;
+  top: 20px;
 }
 .marquesina::after {
-  bottom: 8px;
-  z-index: 2;
+  bottom: 20px;
 }
 .reels li {
+  position: relative;
   flex: none;
-  width: 296px;
+  width: 331px;
+  height: 440px;
+  border-radius: 8px;
+  overflow: hidden;
+  opacity: 0.9;
 }
 .reels img {
   width: 100%;
   height: 100%;
-  aspect-ratio: 9 / 16;
   object-fit: cover;
-  border-radius: 4px;
   display: block;
+}
+/* Nodo 162:787: velo radial navy desde la esquina superior derecha en los videos. */
+.reelVideo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(163px 122px at 100% 0, rgba(8, 47, 83, 0.65), rgba(8, 47, 83, 0));
+}
+.reels .play {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 40px;
+  height: 40px;
+  z-index: 1;
+}
+/* Nodos 162:799/800: fundidos navy sobre la tira. El derecho remata sólido en
+   el borde del lienzo para que la tira se disuelva y no corte en seco. */
+.fadeIzq,
+.fadeDer {
+  position: absolute;
+  top: 57px;
+  height: 552px;
+  z-index: 1;
+  pointer-events: none;
+}
+.fadeIzq {
+  left: calc(50% - 309px);
+  width: 299px;
+  background:
+    linear-gradient(90deg, rgba(8, 47, 83, 0.88) 0%, rgba(8, 47, 83, 0) 100%),
+    linear-gradient(90deg, #082f53 0%, rgba(8, 47, 83, 0) 100%);
+}
+.fadeDer {
+  right: calc(50% - 720px);
+  width: 308px;
+  background: linear-gradient(270deg, #082f53 0%, rgba(8, 47, 83, 0) 100%);
 }
 
 /* ----------------------------------------------------------- Testimonios -- */
@@ -1026,12 +1070,8 @@
   }
 }
 @media (max-width: 620px) {
-  .testis,
-  .reels {
+  .testis {
     grid-template-columns: 1fr;
-  }
-  .reels {
-    grid-template-columns: repeat(3, 1fr);
   }
   .bubble {
     font-size: 12px;

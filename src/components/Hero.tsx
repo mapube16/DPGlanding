@@ -15,9 +15,6 @@ export default function Hero() {
   useEffect(() => {
     const el = ref.current
     if (!el) return
-    // Antes se salía aquí con "reducir movimiento" y el cielo se quedaba en día
-    // para siempre. Un cambio de color ligado al scroll no marea; lo que sí
-    // puede marear es el recorrido del astro, y eso se desactiva en el CSS.
 
     let frame = 0
     const actualizar = () => {
@@ -60,7 +57,8 @@ export default function Hero() {
           </p>
         </div>
 
-        {/* LCP: una sola imagen, prioridad alta y dimensiones fijas para no generar CLS. */}
+        {/* LCP: la imagen de día con prioridad alta y dimensiones fijas para no
+            generar CLS. La nocturna se funde encima según el scroll (--t). */}
         <img
           className={s.paisaje}
           src="/img/hero/paisaje-dia-1600.webp"
@@ -72,7 +70,18 @@ export default function Hero() {
           fetchPriority="high"
           decoding="async"
         />
-        <div className={s.velo} aria-hidden="true" />
+        <img
+          className={`${s.paisaje} ${s.paisajeNoche}`}
+          src="/img/hero/paisaje-noche-1600.webp"
+          srcSet="/img/hero/paisaje-noche-1600.webp 1600w, /img/hero/paisaje-noche-2400.webp 2400w"
+          sizes="100vw"
+          alt=""
+          aria-hidden="true"
+          width={1600}
+          height={900}
+          loading="lazy"
+          decoding="async"
+        />
       </div>
     </section>
   )

@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { PAGES } from '@/lib/site'
+import { NAP } from '@/lib/site'
 import s from './BarraMensaje.module.css'
 
 // Nodo 133:1029. Las 6 variantes del componente son los fotogramas de un efecto
@@ -22,8 +22,6 @@ export default function BarraMensaje() {
   const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
 
   useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-
     let frase = 0
     let i = FRASES[0].length
     let borrando = false
@@ -62,8 +60,15 @@ export default function BarraMensaje() {
     setTexto('')
   }
 
+  // El envío abre el chat de WhatsApp de DPG con lo escrito como mensaje.
+  function enviar(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    const mensaje = new FormData(e.currentTarget).get('mensaje')?.toString().trim() ?? ''
+    window.open(`${NAP.whatsapp}&text=${encodeURIComponent(mensaje)}`, '_blank', 'noopener')
+  }
+
   return (
-    <form className={s.barra} action={PAGES.asesoria.path} method="get">
+    <form className={s.barra} onSubmit={enviar}>
       <label className="sr-only" htmlFor="aria-mensaje">
         Escríbenos qué quieres cuidar
       </label>

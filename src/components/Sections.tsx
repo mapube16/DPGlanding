@@ -36,8 +36,8 @@ export function Aria() {
         <Image
           src="/img/aria/aria-asistente-virtual-dpg-seguros.svg"
           alt="Aria, la asistente de DPG Seguros, saludando"
-          width={560}
-          height={792}
+          width={645}
+          height={973}
           priority
         />
       </div>
@@ -137,8 +137,8 @@ export function Asesoria() {
         <Image
           src="/img/aria/aria-asesoria-personalizada-seguros.svg"
           alt="Asesora de DPG Seguros explicando una póliza a un cliente en Armenia"
-          width={1097}
-          height={776}
+          width={1292}
+          height={905}
           loading="lazy"
         />
       </div>
@@ -223,10 +223,22 @@ export function PorQue() {
 /* --------------------------------------------------------------- Redes ---- */
 
 const REELS = [
-  { src: '/img/reel1.jpg', alt: 'Asesor de DPG Seguros explicando una póliza en video de Instagram' },
-  { src: '/img/reel2.jpg', alt: 'Video de DPG Seguros sobre cobertura de equipaje en el seguro de viajes' },
-  { src: '/img/reel3.jpg', alt: 'Asesora de DPG Seguros respondiendo dudas frecuentes sobre seguros' },
+  { src: '/img/reel1.jpg', alt: 'Asesor de DPG Seguros explicando una póliza en video de Instagram', video: true },
+  { src: '/img/reel2.jpg', alt: 'Video de DPG Seguros sobre cobertura de equipaje en el seguro de viajes', video: false },
+  { src: '/img/reel3.jpg', alt: 'Asesora de DPG Seguros respondiendo dudas frecuentes sobre seguros', video: true },
+  { src: '/img/reel4.jpg', alt: 'Infografía de DPG Seguros con consejos para preparar tu hogar ante un sismo', video: false },
 ]
+
+function Reel({ reel, copia }: { reel: (typeof REELS)[number]; copia?: boolean }) {
+  return (
+    <li className={reel.video ? s.reelVideo : undefined}>
+      <img src={reel.src} alt={copia ? '' : reel.alt} width={331} height={440} loading="lazy" decoding="async" />
+      {reel.video && (
+        <img className={s.play} src="/img/play.svg" alt="" width={40} height={40} loading="lazy" decoding="async" />
+      )}
+    </li>
+  )
+}
 
 export function Redes() {
   return (
@@ -237,19 +249,18 @@ export function Redes() {
       <div className={s.marquesina}>
         <ul className={s.reels}>
           {REELS.map((r) => (
-            <li key={r.src}>
-              <img src={r.src} alt={r.alt} width={360} height={640} loading="lazy" decoding="async" />
-            </li>
+            <Reel key={r.src} reel={r} />
           ))}
         </ul>
         <ul className={s.reels} aria-hidden="true">
           {REELS.map((r) => (
-            <li key={`c-${r.src}`}>
-              <img src={r.src} alt="" width={360} height={640} loading="lazy" decoding="async" />
-            </li>
+            <Reel key={`c-${r.src}`} reel={r} copia />
           ))}
         </ul>
       </div>
+      {/* Nodos 162:799/800: fundidos navy sobre la tira, a ambos lados. */}
+      <div className={s.fadeIzq} aria-hidden="true" />
+      <div className={s.fadeDer} aria-hidden="true" />
 
       <div className="wrap">
         <div className={s.redesCol}>

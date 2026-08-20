@@ -24,35 +24,65 @@
   inset: 0;
   z-index: 0;
 }
+/* Gradientes 1:1 con las variantes del Figma (59:426 / 59:463 / 59:497).
+   El día es la base SIEMPRE opaca; tarde y noche se funden encima. Si el día
+   también se desvaneciera, en mitad de la transición se transparentaría el
+   fondo crema de la página y el cielo se vería lavado. */
 .dia {
-  background: linear-gradient(180deg, #9ad5eb 0%, #bfe3e2 55%, #e7ecd2 100%);
-  opacity: clamp(0, calc(1 - var(--t) * 2), 1);
+  background: linear-gradient(180deg, #93d4f1 0%, #ffe9ac 100%);
 }
 .tarde {
-  background: linear-gradient(180deg, #7fb6d9 0%, #f0c48c 62%, #f6d9a8 100%);
+  background: linear-gradient(180deg, #e99570 0%, #181644 100%);
   opacity: clamp(0, calc(1 - 2 * max(calc(var(--t) - 0.5), calc(0.5 - var(--t)))), 1);
 }
 .noche {
-  background: linear-gradient(180deg, #06203c 0%, #0d3d63 60%, #1e5878 100%);
+  background: linear-gradient(180deg, #0a1d2f 0%, #0e2a3d 40%, #12384d 70%);
   opacity: clamp(0, calc(var(--t) * 2 - 1), 1);
 }
 
-/* Astro: viaja de izquierda a derecha y baja al atardecer. Sol → luna. */
+/* Astro 1:1 con el Figma: arco desde abajo-izquierda (12%, 48%) hasta el
+   cénit al atardecer (50%, 13%) y baja a abajo-derecha (88%, 49%) como luna.
+   --pico vale 1 en pleno atardecer y 0 en los extremos; tiñe el sol de dorado. */
 .astro {
+  --pico: clamp(0, calc(1 - 2 * max(calc(var(--t) - 0.5), calc(0.5 - var(--t)))), 1);
   position: absolute;
   z-index: 1;
-  left: calc(12% + 66% * var(--t));
-  top: calc(42% + 16% * var(--t) - 36% * var(--t) * var(--t));
+  left: calc(12% + 76% * var(--t));
+  top: calc(48% - 141% * var(--t) + 142% * var(--t) * var(--t));
+  transform: translate(-50%, -50%);
   width: 120px;
   height: 120px;
-  border-radius: 50%;
+}
+/* Dos capas que se cruzan en el último tramo del scroll: el sol (disco lleno)
+   se apaga mientras entra la luna, que es el mismo disco con el creciente
+   RECORTADO por una máscara — así en el hueco se ve el cielo real y no queda
+   ningún borde oscuro sobre el halo. */
+.astro::before,
+.astro::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+.astro::before {
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, #fffdf2, #f6c14e calc(var(--pico) * 100%)) 38%,
+    color-mix(in srgb, rgba(255, 253, 242, 0.75), rgba(246, 193, 78, 0.75) calc(var(--pico) * 100%))
+      55%,
+    rgba(255, 253, 242, 0) 72%
+  );
+  opacity: clamp(0, calc(4 - var(--t) * 4), 1);
+}
+.astro::after {
   background: radial-gradient(
     circle,
     #fffdf2 38%,
     rgba(255, 253, 242, 0.75) 55%,
     rgba(255, 253, 242, 0) 72%
   );
-  filter: hue-rotate(calc(var(--t) * -25deg)) saturate(calc(1 + var(--t)));
+  -webkit-mask-image: radial-gradient(ellipse 36% 36% at 72% 20%, transparent 96%, #000 100%);
+  mask-image: radial-gradient(ellipse 36% 36% at 72% 20%, transparent 96%, #000 100%);
+  opacity: clamp(0, calc(var(--t) * 4 - 3), 1);
 }
 
 .estrellas {
@@ -70,7 +100,17 @@
     radial-gradient(2px 2px at 71% 52%, #fff, transparent),
     radial-gradient(1px 1px at 84% 26%, #fff, transparent),
     radial-gradient(2px 2px at 92% 60%, #fff, transparent),
-    radial-gradient(1px 1px at 6% 52%, #fff, transparent);
+    radial-gradient(1px 1px at 6% 52%, #fff, transparent),
+    radial-gradient(1px 1px at 16% 12%, #fff, transparent),
+    radial-gradient(2px 2px at 28% 40%, #fff, transparent),
+    radial-gradient(1px 1px at 40% 55%, #fff, transparent),
+    radial-gradient(1px 1px at 50% 8%, #fff, transparent),
+    radial-gradient(2px 2px at 58% 68%, #fff, transparent),
+    radial-gradient(1px 1px at 68% 30%, #fff, transparent),
+    radial-gradient(1px 1px at 78% 10%, #fff, transparent),
+    radial-gradient(2px 2px at 88% 42%, #fff, transparent),
+    radial-gradient(1px 1px at 96% 22%, #fff, transparent),
+    radial-gradient(1px 1px at 33% 76%, #fff, transparent);
 }
 
 .paisaje {
@@ -85,20 +125,13 @@
   height: auto;
   z-index: 2;
   pointer-events: none;
-  filter: brightness(calc(1 - 0.55 * var(--t))) saturate(calc(1 - 0.5 * var(--t)))
-    contrast(calc(1 + 0.1 * var(--t)));
 }
-/* Veladura fría sobre el paisaje al anochecer. */
-.velo {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 32.5%;
-  bottom: 0;
+/* Anochecer 1:1 con el Figma: el paisaje nocturno (ventanas encendidas) se
+   funde encima del diurno según el scroll — sin filtros ni veladuras, que
+   dejaban costuras contra el cielo. */
+.paisajeNoche {
+  opacity: var(--t);
   z-index: 3;
-  pointer-events: none;
-  background: linear-gradient(180deg, rgba(10, 40, 80, 0.55) 0%, rgba(6, 26, 56, 0.75) 100%);
-  opacity: clamp(0, calc(var(--t) * 1.6 - 0.6), 1);
 }
 
 .content {
@@ -124,15 +157,6 @@
   color: color-mix(in srgb, #162025, #ccddf7 calc(clamp(0, (var(--t) - 0.55) * 2.6, 1) * 100%));
 }
 
-/* Con "reducir movimiento" el cielo sigue cambiando de día a noche —es color,
-   no movimiento— pero el astro se queda quieto en lugar de recorrer el cielo. */
-@media (prefers-reduced-motion: reduce) {
-  .astro {
-    left: 12%;
-    top: 42%;
-  }
-}
-
 @media (max-width: 700px) {
   .hero {
     height: 220vh;
@@ -143,9 +167,6 @@
   .paisaje {
     top: 38%;
     min-width: 760px;
-  }
-  .velo {
-    top: 38%;
   }
   .astro {
     width: 80px;

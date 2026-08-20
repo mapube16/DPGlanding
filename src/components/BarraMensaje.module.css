@@ -90,10 +90,3 @@
   height: 20px;
   display: block;
 }
-
-@media (prefers-reduced-motion: reduce) {
-  .cursor {
-    animation: none;
-    opacity: 0;
-  }
-}

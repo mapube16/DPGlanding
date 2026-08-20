@@ -20,8 +20,6 @@ export default function AutoCiclo({
   seccion: string
 }) {
   useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-
     const radios = Array.from(
       document.querySelectorAll<HTMLInputElement>(`input[type="radio"][name="${name}"]`),
     )

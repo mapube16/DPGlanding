@@ -27,6 +27,7 @@ export const NAP = {
   googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Carrera+15+%234N-44+Armenia+Quind%C3%ADo',
   googleBusinessUrl: 'https://www.google.com/maps/search/?api=1&query=DPG+Seguros+Armenia+Quind%C3%ADo',
   instagram: 'https://www.instagram.com/dpg_seguros/',
+  whatsapp: 'https://api.whatsapp.com/send/?phone=%2B5763470078&type=phone_number&app_absent=0',
 } as const
 
 export const BRAND = {
