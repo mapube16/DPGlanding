@@ -288,21 +288,3 @@ export const SME = {
   bio: 'El contenido de este sitio lo revisa el equipo técnico de DPG Seguros, corredores con más de 28 años intermediando pólizas de personas y empresas en el Quindío. Lo que publicamos sale de condicionados vigentes y de casos que hemos gestionado ante las aseguradoras, no de fichas comerciales.',
 }
 
-export const HOME_FAQS = [
-  {
-    q: '¿Qué hace un corredor de seguros y por qué no comprar directo a la aseguradora?',
-    a: 'Un corredor trabaja para ti, no para la aseguradora. Compara las opciones de varias compañías, te explica las exclusiones y, cuando ocurre un siniestro, presenta y sostiene la reclamación de tu lado. La prima que pagas es la misma.',
-  },
-  {
-    q: '¿Dónde queda DPG Seguros y desde dónde atienden?',
-    a: 'Nuestra oficina está en la Carrera 15 # 4N-44 de Armenia, Quindío, y atendemos clientes de toda Colombia de forma remota. Puedes escribirnos, llamarnos o pedir una asesoría en línea.',
-  },
-  {
-    q: '¿Con cuántas aseguradoras trabajan?',
-    a: 'Con más de 27 compañías, entre ellas SURA, Mapfre, Allianz, La Previsora, HDI, AXA Colpatria, Seguros del Estado, SBS y Seguros Bolívar. Tú hablas con un solo interlocutor y nosotros buscamos entre todas.',
-  },
-  {
-    q: '¿La asesoría tiene algún costo?',
-    a: 'No. La asesoría es gratuita y no te obliga a comprar. Nuestra remuneración la paga la aseguradora cuando decides tomar una póliza, sin que eso encarezca tu prima.',
-  },
-]

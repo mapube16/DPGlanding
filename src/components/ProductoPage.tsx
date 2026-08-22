@@ -6,8 +6,7 @@ import ModalAseguradora from './ModalAseguradora'
 import Badge from './Badge'
 import JsonLd from './JsonLd'
 import Contacto from './Contacto'
-import { Faq } from './Sections'
-import { faqSchema, serviceSchema } from '@/lib/seo'
+import { serviceSchema } from '@/lib/seo'
 import { PAGES, BRAND, NAP } from '@/lib/site'
 import { PRODUCTS, type Product } from '@/lib/content'
 import s from './ProductoPage.module.css'
@@ -22,7 +21,6 @@ export default function ProductoPage({ product }: { product: Product }) {
   return (
     <>
       <JsonLd data={serviceSchema(page, product.faqs)} id="service" />
-      <JsonLd data={faqSchema(product.faqs)} id="faq" />
 
       <Breadcrumbs
         trail={[
@@ -50,12 +48,12 @@ export default function ProductoPage({ product }: { product: Product }) {
                 Comprar en línea
               </CtaLink>
             )}
-            <CtaLink
+            <Link
               className={`btn ${product.accent === 'green' ? 'btn--ghost-green' : 'btn--ghost-blue'}`}
-              href={product.quoteUrl}
+              href="/#contacto"
             >
               Cotizar
-            </CtaLink>
+            </Link>
           </div>
           <p className={s.respaldo}>
             <Badge className={s.badgeInline} partes={product.badge} /> · Comparamos {BRAND.insurersCount}+ aseguradoras ·{' '}
@@ -100,8 +98,6 @@ export default function ProductoPage({ product }: { product: Product }) {
             />
           </div>
         </section>
-
-        <Faq faqs={product.faqs} title={`Preguntas frecuentes sobre el ${page.keyword}`} />
 
         <section className="section section--cream">
           <div className="wrap">

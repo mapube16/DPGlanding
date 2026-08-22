@@ -4,8 +4,7 @@ import Breadcrumbs from '@/components/Breadcrumbs'
 import Contacto from '@/components/Contacto'
 import JsonLd from '@/components/JsonLd'
 import Aliados from '@/components/Aliados'
-import { Faq } from '@/components/Sections'
-import { pageMetadata, faqSchema, serviceSchema } from '@/lib/seo'
+import { pageMetadata, serviceSchema } from '@/lib/seo'
 import { PAGES, BRAND, NAP } from '@/lib/site'
 import { PRODUCTS } from '@/lib/content'
 import s from './page.module.css'
@@ -13,30 +12,10 @@ import s from './page.module.css'
 const page = PAGES.asesoria
 export const metadata: Metadata = pageMetadata(page)
 
-const FAQS = [
-  {
-    q: '¿La asesoría en seguros tiene costo?',
-    a: 'No. La asesoría es gratuita y no te obliga a comprar. Nuestra remuneración la paga la aseguradora cuando decides tomar una póliza, y eso no encarece tu prima.',
-  },
-  {
-    q: '¿Cuánto se demoran en responder?',
-    a: 'Respondemos dentro del siguiente día hábil. Si el caso es urgente, llámanos directamente y lo atendemos en el momento.',
-  },
-  {
-    q: '¿Atienden fuera de Armenia?',
-    a: 'Sí. Nuestra oficina está en Armenia, Quindío, y atendemos clientes de toda Colombia de forma remota, por teléfono, correo y videollamada.',
-  },
-  {
-    q: '¿Qué pasa si ya tengo una póliza con otra aseguradora?',
-    a: 'La revisamos contigo sin compromiso. Si la que tienes te sirve, te lo decimos; si encontramos una mejor, te mostramos la comparación completa antes de que decidas.',
-  },
-]
-
 export default function Page() {
   return (
     <>
-      <JsonLd data={serviceSchema(page, FAQS)} id="service" />
-      <JsonLd data={faqSchema(FAQS)} id="faq" />
+      <JsonLd data={serviceSchema(page)} id="service" />
 
       <Breadcrumbs
         trail={[
@@ -88,7 +67,6 @@ export default function Page() {
         </section>
 
         <Aliados />
-        <Faq faqs={FAQS} title="Preguntas frecuentes sobre la asesoría" />
       </article>
 
       <Contacto />

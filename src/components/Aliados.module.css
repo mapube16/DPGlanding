@@ -222,23 +222,28 @@
 @media (max-width: 760px) {
   .aliados {
     display: block;
-    height: 1036px;
+    height: min(242.06vw, 1036px);
     min-height: 0;
-    padding: 90px 0 0;
+    padding: min(21.03vw, 90px) 0 0;
   }
   .col {
     width: 100%;
-    gap: 32px;
+    gap: min(7.48vw, 32px);
   }
   .col h2 {
-    font-size: 58px;
+    font-size: min(13.55vw, 58px);
   }
+  .col > p,
+  .claim {
+    font-size: min(4.67vw, 20px);
+  }
+  /* Anillo de 938px del lienzo móvil, centrado y arrancando en y=533. */
   .ring {
     position: absolute;
     left: 50%;
     right: auto;
-    top: 533px;
-    width: 938px;
+    top: min(124.53vw, 533px);
+    width: min(219.16vw, 938px);
     margin: 0;
     transform: translateX(-50%);
   }

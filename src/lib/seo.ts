@@ -99,17 +99,7 @@ export function breadcrumbSchema(trail: { name: string; path: string }[]): Json 
   }
 }
 
-export function faqSchema(faqs: { q: string; a: string }[]): Json {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: faqs.map((f) => ({
-      '@type': 'Question',
-      name: f.q,
-      acceptedAnswer: { '@type': 'Answer', text: f.a },
-    })),
-  }
-}
+
 
 export function serviceSchema(page: PageMeta, faqs?: { q: string; a: string }[]): Json {
   return {

@@ -953,48 +953,6 @@
   font-weight: 700;
 }
 
-/* ------------------------------------------------------------------- FAQ -- */
-.faq {
-  display: grid;
-  gap: 12px;
-  max-width: 880px;
-}
-.faq details {
-  border: 1px solid rgba(22, 32, 37, 0.12);
-  border-radius: 16px;
-  background: var(--cream);
-  padding: 4px 22px;
-}
-.faq summary {
-  cursor: pointer;
-  list-style: none;
-  padding: 18px 0;
-}
-.faq summary::-webkit-details-marker {
-  display: none;
-}
-.faq summary h3 {
-  display: inline;
-  font-family: var(--font-body);
-  font-size: 17px;
-  font-weight: 700;
-  color: var(--yale);
-}
-.faq summary::after {
-  content: '+';
-  float: right;
-  font-size: 22px;
-  color: var(--verde-oscuro);
-  line-height: 1;
-}
-.faq details[open] summary::after {
-  content: '–';
-}
-.faq details p {
-  margin: 0 0 20px;
-  font-size: 16px;
-}
-
 /* -------------------------------------------------------------- Responsive */
 @media (max-width: 1000px) {
   .cards,
@@ -1058,62 +1016,70 @@
   width: 474px;
 }
 
-/* ====================== Móvil 1:1 con el Figma (frame 196:349, 428px) ====================== */
+/* ====================== Móvil 1:1 con el Figma (frame 196:349) ======================
+   El lienzo móvil mide 428px. Cada medida se escribe como min(Xvw, Ypx): en
+   pantallas más estrechas que 428 (la mayoría: 360, 390, 393…) toda la
+   composición se reduce en proporción, y nunca crece por encima del diseño.
+   Con valores fijos en px el arte se salía y los textos pisaban las
+   ilustraciones. */
 @media (max-width: 760px) {
-  /* Sobre Aria (196:1762): texto arriba; Aria y las burbujas en las posiciones
-     del diseño móvil, recortadas por la sección de 926px. */
+  /* --- Sobre Aria (196:1762) --- */
   .aria {
     display: block;
-    height: 926px;
+    height: min(216.36vw, 926px);
     min-height: 0;
-    padding: 90px 0 0;
+    padding: min(21.03vw, 90px) 0 0;
   }
   .ariaCol {
     width: 100%;
-    gap: 32px;
+    gap: min(7.48vw, 32px);
   }
   .ariaTitle {
-    font-size: 58px;
+    font-size: min(13.55vw, 58px);
     white-space: normal;
   }
-  /* Halo móvil (196:2507): 361px en (25, 498). */
+  .ariaText {
+    font-size: min(4.67vw, 20px);
+  }
+  /* Halo (196:2507): 361px en (25, 498). */
   .ariaGlow {
-    left: 25px;
+    left: min(5.84vw, 25px);
     right: auto;
-    top: 498px;
-    width: 361px;
-    height: 361px;
+    top: min(116.36vw, 498px);
+    width: min(84.35vw, 361px);
+    height: min(84.35vw, 361px);
     filter: blur(86px);
   }
-  /* Dibujo (capa layer2 de 196:2508): 347px en (29, 448); la sección recorta 45px abajo. */
+  /* Dibujo (capa layer2 de 196:2508): 347px en (29, 448). */
   .ariaArt {
     right: auto;
-    left: 29px;
-    top: 448px;
-    width: 347px;
+    left: min(6.78vw, 29px);
+    top: min(104.67vw, 448px);
+    width: min(81.07vw, 347px);
+  }
+  .bubble {
+    height: min(12.15vw, 52px);
+    padding: 0 min(4.67vw, 20px);
+    font-size: min(3.74vw, 16px);
+    border-radius: min(3.74vw, 16px);
   }
   .b2 {
     right: auto;
-    left: 36px;
-    top: 505px;
+    left: min(8.41vw, 36px);
+    top: min(117.99vw, 505px);
   }
   .b1 {
     right: auto;
-    left: 245px;
-    top: 631px;
+    left: min(57.24vw, 245px);
+    top: min(147.43vw, 631px);
   }
   .b3 {
     right: auto;
-    left: 71px;
-    top: 793px;
-  }
-  .bubble {
-    font-size: 16px;
-    padding: 6px 20px;
+    left: min(16.59vw, 71px);
+    top: min(185.28vw, 793px);
   }
 
-  /* Productos (196:2689): cabecera apilada, tarjetas en carrusel horizontal y
-     banner centrado. */
+  /* --- Productos (196:2689): cabecera apilada y tarjetas en carrusel --- */
   .prodHead {
     flex-direction: column;
     align-items: flex-start;
@@ -1121,11 +1087,12 @@
   }
   .prodHead h2 {
     width: auto;
-    font-size: 58px;
+    font-size: min(13.55vw, 58px);
   }
   .prodHead p {
     width: auto;
     text-align: left;
+    font-size: min(4.67vw, 20px);
   }
   .cards {
     justify-content: flex-start;
@@ -1140,6 +1107,7 @@
   }
   .card {
     scroll-snap-align: start;
+    width: min(75.7vw, 324px);
   }
   .banner {
     flex-direction: column;
@@ -1152,80 +1120,94 @@
     width: auto;
   }
 
-  /* Asesoría (196:2775): texto arriba; la escena (marco a 0.553) abajo, recortada. */
+  /* --- Asesoría (196:2775): la escena entra por abajo a la izquierda --- */
   .asesoria {
     display: block;
-    height: 926px;
+    height: min(216.36vw, 926px);
     min-height: 0;
-    padding: 90px 0 0;
+    padding: min(21.03vw, 90px) 0 0;
   }
   .asesoriaCol {
     width: 100%;
-    gap: 36px;
+    gap: min(8.41vw, 36px);
   }
   .asesoriaCol h2 {
     width: auto;
-    font-size: 58px;
+    font-size: min(13.55vw, 58px);
+  }
+  .asesoriaCol p {
+    width: auto;
+    font-size: min(4.67vw, 20px);
   }
   .asesoriaArt {
     right: auto;
-    left: -64px;
-    top: 604px;
-    width: 508px;
+    left: max(-14.95vw, -64px);
+    top: min(141.12vw, 604px);
+    width: min(118.69vw, 508px);
   }
 
-  /* Por qué DPG (200:3322): sección de 926px y fantasma más pequeño. */
+  /* --- Por qué DPG (200:3322): fantasma de 297x249 en el lienzo móvil --- */
   .porque {
-    min-height: 926px;
+    min-height: min(216.36vw, 926px);
   }
   .ghost {
-    font-size: clamp(80px, 21.5vw, 310px);
+    width: min(69.4vw, 297px);
+    font-size: min(42.76vw, 183px);
   }
 
-  /* Redes (200:3345): texto arriba y la tira de reels debajo, a lo ancho. */
+  /* --- Redes (200:3345): texto arriba, tira de reels debajo --- */
   .redes {
     display: block;
-    height: 926px;
+    height: min(216.36vw, 926px);
     min-height: 0;
-    padding: 90px 0 0;
+    padding: min(21.03vw, 90px) 0 0;
   }
   .redesCol {
     width: 100%;
-    gap: 36px;
+    gap: min(8.41vw, 36px);
   }
   .redesCol h2 {
-    font-size: 58px;
+    font-size: min(13.55vw, 58px);
+  }
+  .redesCol p {
+    font-size: min(4.67vw, 20px);
   }
   .marquesina {
     left: 0;
     right: 0;
-    top: 583px;
+    top: min(136.21vw, 583px);
+    height: min(128.97vw, 552px);
   }
   .reels li {
-    width: 212px;
-    height: 282px;
+    width: min(52.34vw, 224px);
+    height: min(69.63vw, 298px);
   }
 
-  /* Testimonios (202:3490) */
+  /* --- Testimonios (202:3490) --- */
   .testiHead h2 {
     width: auto;
-    font-size: 58px;
+    font-size: min(13.55vw, 58px);
+  }
+  .testiHead p {
+    font-size: min(4.67vw, 20px);
   }
 }
 
-/* Por qué DPG móvil (200:3322): el titular conserva 42/58px; píldoras de 36px
-   en filas centradas con 18px de separación (2-2-1 tras la primera). */
+/* Por qué DPG móvil (200:3322): titular 42/58 y píldoras de 36px de alto. */
 @media (max-width: 760px) {
   .porqueTitle .l1 {
-    font-size: 42px;
+    font-size: min(9.81vw, 42px);
   }
   .porqueTitle .l2 {
-    font-size: 58px;
+    font-size: min(13.55vw, 58px);
+  }
+  .porqueLead {
+    font-size: min(4.67vw, 20px);
   }
   .tabs {
-    gap: 18px;
+    gap: min(4.21vw, 18px);
   }
   .tab {
-    padding: 8px 20px;
+    padding: 8px min(4.67vw, 20px);
   }
 }

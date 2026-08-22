@@ -114,9 +114,9 @@ export function Productos() {
                     Comprar
                   </CtaLink>
                 )}
-                <CtaLink className={`btn ${p.accent === 'green' ? 'btn--ghost-green' : 'btn--ghost-blue'}`} href={p.quoteUrl}>
+                <Link className={`btn ${p.accent === 'green' ? 'btn--ghost-green' : 'btn--ghost-blue'}`} href="/#contacto">
                   Cotizar
-                </CtaLink>
+                </Link>
               </div>
             </li>
           ))}
@@ -311,26 +311,3 @@ export function Testimonios() {
     </section>
   )
 }
-
-/* ------------------------------------------------------------ FAQ --- */
-
-export function Faq({ faqs, title = 'Preguntas frecuentes' }: { faqs: { q: string; a: string }[]; title?: string }) {
-  return (
-    <section className="section section--white" id="faq">
-      <div className="wrap">
-        <h2 className={s.h2}>{title}</h2>
-        <div className={s.faq}>
-          {faqs.map((f) => (
-            <details key={f.q}>
-              <summary>
-                <h3>{f.q}</h3>
-              </summary>
-              <p>{f.a}</p>
-            </details>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
