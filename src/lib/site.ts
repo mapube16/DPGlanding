@@ -16,7 +16,7 @@ export const NAP = {
   postalCode: '630004',
   country: 'CO',
   countryName: 'Colombia',
-  email: 'gerencia@dpgseguros.com',
+  email: 'proyectos@dpgseguros.com',
   // Se usa en enlaces tel:, en el schema LocalBusiness y en las citaciones.
   phone: process.env.NEXT_PUBLIC_PHONE || '+573108813559',
   phoneDisplay: process.env.NEXT_PUBLIC_PHONE_DISPLAY || '310 881 3559',
