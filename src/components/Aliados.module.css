@@ -228,9 +228,10 @@
   }
   .col {
     width: 100%;
+    gap: 32px;
   }
   .col h2 {
-    font-size: 52px;
+    font-size: 58px;
   }
   .ring {
     position: absolute;

@@ -2,45 +2,13 @@
 
 import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
+import MENSAJES from '@/lib/aria-mensajes.json'
 import s from './AriaFlotante.module.css'
 
 // Nodo 181:353 — componente con 7 variantes, una por sección. Flota sobre la
 // página y cambia de mensaje según la sección que estés viendo.
-// Copy 1:1 con el diseño.
-const MENSAJES: { id: string; texto: string }[] = [
-  {
-    id: 'productos',
-    texto:
-      'Estos tres los cotizas y compras tú mismo, en minutos. ¿No te suena ninguno? ¡Tenemos más opciones!',
-  },
-  {
-    id: 'asesoria',
-    texto:
-      'Cada vida, negocio y momento es distinto. Por eso, construimos la recomendación desde cero para ti.',
-  },
-  {
-    id: 'aliados',
-    texto: 'Aquí no tienes que llamar a veinte lugares distintos. Nosotros comparamos y tú decides.',
-  },
-  {
-    id: 'pilares',
-    texto:
-      'Desarrollo, Protección y Garantía. No es simplemente un eslogan, es cómo trabajamos desde 1998.',
-  },
-  {
-    id: 'por-que-dpg',
-    texto: 'Estos son los compromisos que asumimos con cada persona que confía en nosotros.',
-  },
-  {
-    id: 'redes',
-    texto:
-      'Allí seguimos la conversación: consejos, novedades y respuestas a lo que más nos preguntan.',
-  },
-  {
-    id: 'testimonios',
-    texto: 'Historias reales de gente que hoy nos recomienda. Ese es nuestro mejor argumento.',
-  },
-]
+// Copy 1:1 con el diseño, en aria-mensajes.json: el mismo archivo alimenta al
+// script que graba las voces (scripts/generar-voz-aria.mjs).
 
 export default function AriaFlotante() {
   const [activo, setActivo] = useState<number | null>(null)
@@ -48,6 +16,7 @@ export default function AriaFlotante() {
   const [abierta, setAbierta] = useState(false)
   const [leyendo, setLeyendo] = useState(false)
   const visibles = useRef<Set<string>>(new Set())
+  const audio = useRef<HTMLAudioElement | null>(null)
 
   useEffect(() => {
     const secciones = MENSAJES.map((m) => document.getElementById(m.id)).filter(
@@ -75,19 +44,37 @@ export default function AriaFlotante() {
     return () => io.disconnect()
   }, [])
 
-  // El icono de altavoz del diseño: lectura en voz alta con la API nativa.
-  function leer(texto: string) {
-    if (!('speechSynthesis' in window)) return
-    if (leyendo) {
-      window.speechSynthesis.cancel()
-      setLeyendo(false)
-      return
-    }
+  // Al cambiar de sección o al desmontar, se calla: si no, Aria seguía hablando
+  // de una sección que ya dejaste atrás.
+  useEffect(() => detener, [activo])
+
+  function detener() {
+    audio.current?.pause()
+    audio.current = null
+    window.speechSynthesis?.cancel()
+    setLeyendo(false)
+  }
+
+  // Voz de Aria grabada con Deepgram (scripts/generar-voz-aria.mjs). Si el mp3
+  // no está o el navegador lo bloquea, cae en la voz del sistema para que el
+  // botón nunca quede muerto.
+  function hablar(texto: string) {
+    audio.current = null
+    if (!('speechSynthesis' in window)) return setLeyendo(false)
     const u = new SpeechSynthesisUtterance(texto)
     u.lang = 'es-CO'
     u.onend = () => setLeyendo(false)
-    setLeyendo(true)
     window.speechSynthesis.speak(u)
+  }
+
+  function leer(mensaje: { id: string; texto: string }) {
+    if (leyendo) return detener()
+    setLeyendo(true)
+    const pista = new Audio(`/audio/aria/${mensaje.id}.mp3`)
+    audio.current = pista
+    pista.onended = detener
+    pista.onerror = () => hablar(mensaje.texto)
+    pista.play().catch(() => hablar(mensaje.texto))
   }
 
   const visible = activo !== null && !cerrado
@@ -132,7 +119,7 @@ export default function AriaFlotante() {
           </button>
           <button
             type="button"
-            onClick={() => mensaje && leer(mensaje.texto)}
+            onClick={() => mensaje && leer(mensaje)}
             aria-label={leyendo ? 'Detener lectura' : 'Escuchar el mensaje'}
           >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">

@@ -1,0 +1,30 @@
+[
+  {
+    "id": "productos",
+    "texto": "Estos tres los cotizas y compras tú mismo, en minutos. ¿No te suena ninguno? ¡Tenemos más opciones!"
+  },
+  {
+    "id": "asesoria",
+    "texto": "Cada vida, negocio y momento es distinto. Por eso, construimos la recomendación desde cero para ti."
+  },
+  {
+    "id": "aliados",
+    "texto": "Aquí no tienes que llamar a veinte lugares distintos. Nosotros comparamos y tú decides."
+  },
+  {
+    "id": "pilares",
+    "texto": "Desarrollo, Protección y Garantía. No es simplemente un eslogan, es cómo trabajamos desde 1998."
+  },
+  {
+    "id": "por-que-dpg",
+    "texto": "Estos son los compromisos que asumimos con cada persona que confía en nosotros."
+  },
+  {
+    "id": "redes",
+    "texto": "Allí seguimos la conversación: consejos, novedades y respuestas a lo que más nos preguntan."
+  },
+  {
+    "id": "testimonios",
+    "texto": "Historias reales de gente que hoy nos recomienda. Ese es nuestro mejor argumento."
+  }
+]

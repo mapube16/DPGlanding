@@ -36,10 +36,13 @@ export default function Contacto() {
 
     setEstado('enviando')
     try {
+      // El backend espera { data: {...} } y arma el correo con esas claves;
+      // el honeypot no viaja para no ensuciar el mensaje que recibe DPG.
+      const { empresa: _honeypot, ...campos } = data
       const res = await fetch(ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ data: campos }),
       })
       if (!res.ok) throw new Error(String(res.status))
       setEstado('ok')

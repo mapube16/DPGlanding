@@ -31,6 +31,7 @@ const FIELD_MASK = [
   'reviews.authorAttribution.displayName',
   'reviews.authorAttribution.photoUri',
   'reviews.relativePublishTimeDescription',
+  'reviews.publishTime', // solo para ordenar: Google las devuelve por relevancia
 ].join(',')
 
 type RespuestaPlaces = {
@@ -39,6 +40,7 @@ type RespuestaPlaces = {
   reviews?: {
     rating?: number
     text?: { text?: string }
+    publishTime?: string
     relativePublishTimeDescription?: string
     authorAttribution?: { displayName?: string; photoUri?: string }
   }[]
@@ -70,6 +72,9 @@ export async function cargarResenasGoogle(signal?: AbortSignal): Promise<Resenas
 
     const items: Resena[] = (data.reviews ?? [])
       .filter((r) => r.text?.text?.trim() && r.rating)
+      // De la más reciente a la más antigua: la API las ordena por relevancia y
+      // dejaba las de 2019 delante de las de este año.
+      .sort((a, b) => (Date.parse(b.publishTime ?? '') || 0) - (Date.parse(a.publishTime ?? '') || 0))
       .map((r) => {
         const author = r.authorAttribution?.displayName?.trim() || 'Cliente en Google'
         return {

@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "serve out -l ${PORT:-3000}",
     "lint": "next lint",
-    "check:seo": "node scripts/check-seo.mjs"
+    "check:seo": "node scripts/check-seo.mjs",
+    "voz:aria": "node scripts/generar-voz-aria.mjs"
   },
   "dependencies": {
     "gsap": "^3.15.0",

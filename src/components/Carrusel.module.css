@@ -50,6 +50,9 @@
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
+  /* Las reseñas reales tienen largos muy distintos: con stretch todas las
+     burbujas miden lo mismo y los autores quedan alineados, como en el Figma. */
+  align-items: stretch;
 }
 .pista::-webkit-scrollbar {
   display: none;
@@ -72,6 +75,7 @@
 
 .testi blockquote {
   position: relative;
+  flex: 1;
   margin: 0;
   width: 250px;
   padding: 30px 30px 50px;
