@@ -17,10 +17,9 @@ export const NAP = {
   country: 'CO',
   countryName: 'Colombia',
   email: 'gerencia@dpgseguros.com',
-  // TODO(cliente): reemplazar por el teléfono real antes de publicar.
   // Se usa en enlaces tel:, en el schema LocalBusiness y en las citaciones.
-  phone: process.env.NEXT_PUBLIC_PHONE || '+576067410000',
-  phoneDisplay: process.env.NEXT_PUBLIC_PHONE_DISPLAY || '(606) 741 0000',
+  phone: process.env.NEXT_PUBLIC_PHONE || '+573108813559',
+  phoneDisplay: process.env.NEXT_PUBLIC_PHONE_DISPLAY || '310 881 3559',
   foundingDate: '1998-04-01', // ISO completo: schema y contador de los pilares
   foundingYear: '1998', // para prosa ("fundado en 1998")
   latitude: 4.5389,

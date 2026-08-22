@@ -1,11 +1,10 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import Image from 'next/image'
 import Breadcrumbs from '@/components/Breadcrumbs'
 import Contacto from '@/components/Contacto'
 import JsonLd from '@/components/JsonLd'
 import Aliados from '@/components/Aliados'
-import { Faq, AutorSme } from '@/components/Sections'
+import { Faq } from '@/components/Sections'
 import { pageMetadata, faqSchema, serviceSchema } from '@/lib/seo'
 import { PAGES, BRAND, NAP } from '@/lib/site'
 import { PRODUCTS } from '@/lib/content'
@@ -13,29 +12,6 @@ import s from './page.module.css'
 
 const page = PAGES.asesoria
 export const metadata: Metadata = pageMetadata(page)
-
-const PASOS = [
-  {
-    n: 1,
-    t: 'Nos cuentas qué quieres cuidar',
-    d: 'Una llamada o un formulario. Sin formatos largos ni datos que no necesitamos todavía.',
-  },
-  {
-    n: 2,
-    t: 'Revisamos qué ya tienes cubierto',
-    d: 'Muchas veces una póliza que ya pagas cubre parte del riesgo. Antes de venderte algo, lo miramos.',
-  },
-  {
-    n: 3,
-    t: 'Comparamos entre las aseguradoras',
-    d: `Cotizamos con las ${BRAND.insurersCount}+ compañías con las que trabajamos y te explicamos las diferencias reales, incluidas las exclusiones.`,
-  },
-  {
-    n: 4,
-    t: 'Te acompañamos después de firmar',
-    d: 'Renovaciones, cambios y, sobre todo, la reclamación: armamos el caso y lo sostenemos ante la aseguradora.',
-  },
-]
 
 const FAQS = [
   {
@@ -87,35 +63,6 @@ export default function Page() {
           </div>
         </header>
 
-        <section className="section section--navy">
-          <div className={`wrap ${s.split}`}>
-            <div>
-              <h2 className={s.h2Light}>Un acompañamiento, no una venta</h2>
-              <ol className={s.pasos}>
-                {PASOS.map((p) => (
-                  <li key={p.n}>
-                    <span className={s.num} aria-hidden="true">
-                      {p.n}
-                    </span>
-                    <div>
-                      <h3>{p.t}</h3>
-                      <p>{p.d}</p>
-                    </div>
-                  </li>
-                ))}
-              </ol>
-            </div>
-            <Image
-              src="/img/aria/aria-asesoria-personalizada-seguros.svg"
-              alt="Asesora de DPG Seguros revisando una póliza con un cliente en Armenia"
-              width={1097}
-              height={776}
-              loading="lazy"
-              className={s.art}
-            />
-          </div>
-        </section>
-
         <section className="section section--cream">
           <div className="wrap">
             <h2 className={s.h2}>¿Ya sabes qué necesitas?</h2>
@@ -145,7 +92,6 @@ export default function Page() {
       </article>
 
       <Contacto />
-      <AutorSme />
     </>
   )
 }

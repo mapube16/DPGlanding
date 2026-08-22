@@ -459,7 +459,8 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: max-content;
+  /* Ancho fijo del nodo 97:478: con max-content la palabra partía en otro punto. */
+  width: 1316px;
   max-width: 97vw;
   font-family: var(--font-title);
   font-size: clamp(120px, 21.5vw, 310px);
@@ -992,37 +993,6 @@
 .faq details p {
   margin: 0 0 20px;
   font-size: 16px;
-}
-
-/* ------------------------------------------------------------------- SME -- */
-.sme {
-  background: var(--sky);
-  padding: 36px 0;
-}
-.smeLabel {
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.8px;
-  text-transform: uppercase;
-  color: var(--yale);
-  margin-bottom: 6px;
-}
-.smeName {
-  font-size: 18px;
-  color: var(--yale);
-  margin-bottom: 10px;
-}
-.smeBio {
-  max-width: 78ch;
-  font-size: 15px;
-}
-.smeContact {
-  margin: 0;
-  font-size: 15px;
-}
-.smeContact a {
-  color: var(--azul-oscuro);
-  font-weight: 700;
 }
 
 /* -------------------------------------------------------------- Responsive */

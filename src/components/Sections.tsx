@@ -9,7 +9,7 @@ import AutoCiclo from './AutoCiclo'
 import AriaSaluda from './AriaSaluda'
 import { leerSvg } from '@/lib/svg'
 import { PAGES, NAP, BRAND } from '@/lib/site'
-import { PRODUCTS, RAZONES, SME, type Product } from '@/lib/content'
+import { PRODUCTS, RAZONES, type Product } from '@/lib/content'
 import s from './Sections.module.css'
 
 /* ---------------------------------------------------------------- Aria ---- */
@@ -312,7 +312,7 @@ export function Testimonios() {
   )
 }
 
-/* ------------------------------------------------------------ FAQ / SME --- */
+/* ------------------------------------------------------------ FAQ --- */
 
 export function Faq({ faqs, title = 'Preguntas frecuentes' }: { faqs: { q: string; a: string }[]; title?: string }) {
   return (
@@ -334,21 +334,3 @@ export function Faq({ faqs, title = 'Preguntas frecuentes' }: { faqs: { q: strin
   )
 }
 
-export function AutorSme() {
-  return (
-    <aside className={s.sme}>
-      <div className="wrap">
-        <p className={s.smeLabel}>Revisado por</p>
-        <p className={s.smeName}>
-          <strong>{SME.name}</strong> · {SME.role}
-        </p>
-        <p className={s.smeBio}>{SME.bio}</p>
-        <p className={s.smeContact}>
-          <a href={`tel:${NAP.phone}`}>Llamar {NAP.phoneDisplay}</a> ·{' '}
-          <a href={`mailto:${NAP.email}`}>{NAP.email}</a> ·{' '}
-          <Link href={PAGES.nosotros.path}>Conocer al equipo</Link>
-        </p>
-      </div>
-    </aside>
-  )
-}

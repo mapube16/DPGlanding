@@ -6,7 +6,7 @@ import ModalAseguradora from './ModalAseguradora'
 import Badge from './Badge'
 import JsonLd from './JsonLd'
 import Contacto from './Contacto'
-import { Faq, AutorSme } from './Sections'
+import { Faq } from './Sections'
 import { faqSchema, serviceSchema } from '@/lib/seo'
 import { PAGES, BRAND, NAP } from '@/lib/site'
 import { PRODUCTS, type Product } from '@/lib/content'
@@ -130,7 +130,6 @@ export default function ProductoPage({ product }: { product: Product }) {
       </article>
 
       <Contacto />
-      <AutorSme />
     </>
   )
 }

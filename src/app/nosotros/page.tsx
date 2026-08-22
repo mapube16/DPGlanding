@@ -4,7 +4,7 @@ import Breadcrumbs from '@/components/Breadcrumbs'
 import Contacto from '@/components/Contacto'
 import Pilares from '@/components/Pilares'
 import Aliados from '@/components/Aliados'
-import { PorQue, Redes, AutorSme } from '@/components/Sections'
+import { PorQue, Redes } from '@/components/Sections'
 import { pageMetadata } from '@/lib/seo'
 import { PAGES, NAP, BRAND } from '@/lib/site'
 import { PRODUCTS, SME } from '@/lib/content'
@@ -124,7 +124,6 @@ export default function Page() {
       </article>
 
       <Contacto />
-      <AutorSme />
     </>
   )
 }
