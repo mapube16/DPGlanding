@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { TESTIMONIOS } from '@/lib/content'
+import { cargarResenasGoogle, type Resena } from '@/lib/resenas'
 import s from './Carrusel.module.css'
 
 // Nodo 162:812 + nota 167:1594: "los botones solamente realizan un
@@ -10,10 +11,20 @@ import s from './Carrusel.module.css'
 // El desplazamiento real lo hace el propio contenedor con scroll-snap; los
 // botones solo mueven el scroll una tarjeta. Así funciona con teclado, con
 // rueda y con gesto táctil sin escribir nada de eso a mano.
+//
+// Las tarjetas arrancan con las reseñas de muestra y, si hay key de Google,
+// se reemplazan por las reales del perfil al cargar (ver lib/resenas.ts).
 export default function Carrusel() {
   const pista = useRef<HTMLUListElement>(null)
+  const [items, setItems] = useState<Resena[]>(TESTIMONIOS)
   const [alInicio, setAlInicio] = useState(true)
   const [alFinal, setAlFinal] = useState(false)
+
+  useEffect(() => {
+    const ac = new AbortController()
+    cargarResenasGoogle(ac.signal).then((r) => r && setItems(r.items))
+    return () => ac.abort()
+  }, [])
 
   function revisarBordes() {
     const el = pista.current
@@ -31,7 +42,7 @@ export default function Carrusel() {
     const ro = new ResizeObserver(revisarBordes)
     ro.observe(el)
     return () => ro.disconnect()
-  }, [])
+  }, [items])
 
   function mover(dir: -1 | 1) {
     const el = pista.current
@@ -57,8 +68,8 @@ export default function Carrusel() {
       </button>
 
       <ul className={s.pista} ref={pista} onScroll={revisarBordes}>
-        {TESTIMONIOS.map((t) => (
-          <li key={t.author} className={s.testi}>
+        {items.map((t) => (
+          <li key={`${t.author}-${t.body.slice(0, 24)}`} className={s.testi}>
             <blockquote>
               <svg className={s.comilla} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M14 21c-.6 0-1-.4-1-1v-5.5c0-4.7 2.6-8 6.5-9.4.5-.2 1.1.1 1.3.6l.3.9c.2.5-.1 1.1-.6 1.3-2.2.8-3.6 2.4-3.9 4.6H20c.6 0 1 .4 1 1V20c0 .6-.4 1-1 1h-6ZM3 21c-.6 0-1-.4-1-1v-5.5C2 9.8 4.6 6.5 8.5 5.1c.5-.2 1.1.1 1.3.6l.3.9c.2.5-.1 1.1-.6 1.3-2.2.8-3.6 2.4-3.9 4.6H9c.6 0 1 .4 1 1V20c0 .6-.4 1-1 1H3Z" />
@@ -66,9 +77,13 @@ export default function Carrusel() {
               <p>{t.body}</p>
             </blockquote>
             <div className={s.quien}>
-              <span className={s.avatar} aria-hidden="true">
-                {t.initials}
-              </span>
+              {t.photo ? (
+                <img className={s.foto} src={t.photo} alt="" referrerPolicy="no-referrer" loading="lazy" />
+              ) : (
+                <span className={s.avatar} aria-hidden="true">
+                  {t.initials}
+                </span>
+              )}
               <div className={s.nombre}>
                 <strong>{t.author}</strong>
                 <span className={s.estrellas} role="img" aria-label={`${t.rating} de 5 estrellas`}>
@@ -78,6 +93,7 @@ export default function Carrusel() {
                     </svg>
                   ))}
                 </span>
+                {t.time && <span className={s.fecha}>{t.time}</span>}
               </div>
             </div>
           </li>

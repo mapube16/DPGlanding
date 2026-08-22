@@ -1,0 +1,98 @@
+/* Nodo 256:716: diálogo de 838px, radio 40, cabecera navy y dos columnas. */
+.modal {
+  width: 838px;
+  max-width: calc(100vw - 32px);
+  padding: 0;
+  border: 0;
+  border-radius: 40px;
+  overflow: hidden;
+  background: #fff;
+  color: var(--carbon);
+  box-shadow: 0 4px 53px rgba(2, 31, 45, 0.34);
+}
+.modal::backdrop {
+  background: rgba(2, 31, 45, 0.55);
+  backdrop-filter: blur(7px);
+}
+
+.cabecera {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 28px;
+  padding: 58px 30px;
+  background: #082f53;
+  text-align: center;
+}
+.titulo {
+  margin: 0;
+  font-size: 38px;
+  line-height: 1;
+  color: var(--cream);
+}
+.cabecera .sub {
+  margin: 0;
+  width: 522px;
+  max-width: 100%;
+  font-size: 20px;
+  line-height: 1.45;
+  color: #ccddf7; /* Sky del Figma, explícito para no depender de herencias */
+}
+/* Al abrir, el foco va al diálogo (no a la X) para que no aparezca el anillo
+   azul del navegador sobre el botón de cerrar; con Tab se llega igual. */
+.modal:focus {
+  outline: none;
+}
+.cerrar {
+  position: absolute;
+  right: 25px;
+  top: 25px;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(247, 244, 236, 0.15);
+  color: var(--cream);
+  cursor: pointer;
+}
+.cerrar svg {
+  width: 24px;
+  height: 24px;
+}
+
+.opciones {
+  display: flex;
+}
+.opcion {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  padding: 48px 20px;
+}
+.opcion:first-child {
+  border-right: 1px solid rgba(8, 47, 83, 0.2);
+}
+.opcion img {
+  height: 60px;
+  width: auto;
+  display: block;
+}
+
+@media (max-width: 620px) {
+  .titulo {
+    font-size: 28px;
+  }
+  .opciones {
+    flex-direction: column;
+  }
+  .opcion:first-child {
+    border-right: 0;
+    border-bottom: 1px solid rgba(8, 47, 83, 0.2);
+  }
+}

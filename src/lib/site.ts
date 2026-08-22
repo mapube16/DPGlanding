@@ -21,11 +21,16 @@ export const NAP = {
   // Se usa en enlaces tel:, en el schema LocalBusiness y en las citaciones.
   phone: process.env.NEXT_PUBLIC_PHONE || '+576067410000',
   phoneDisplay: process.env.NEXT_PUBLIC_PHONE_DISPLAY || '(606) 741 0000',
-  foundingDate: '1998',
+  foundingDate: '1998-04-01', // ISO completo: schema y contador de los pilares
+  foundingYear: '1998', // para prosa ("fundado en 1998")
   latitude: 4.5389,
   longitude: -75.6725,
   googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Carrera+15+%234N-44+Armenia+Quind%C3%ADo',
-  googleBusinessUrl: 'https://www.google.com/maps/search/?api=1&query=DPG+Seguros+Armenia+Quind%C3%ADo',
+  // Perfil de Google Business de DPG Seguros (Armenia). Mismo Place ID que en
+  // github.com/mapube16/landingdpg; con él se traen las reseñas reales.
+  googlePlaceId: 'ChIJWd1bevz0OI4RE3d_C79jWCs',
+  googleBusinessUrl: 'https://www.google.com/maps/place/?q=place_id:ChIJWd1bevz0OI4RE3d_C79jWCs',
+  googleWriteReviewUrl: 'https://search.google.com/local/writereview?placeid=ChIJWd1bevz0OI4RE3d_C79jWCs',
   instagram: 'https://www.instagram.com/dpg_seguros/',
   whatsapp: 'https://api.whatsapp.com/send/?phone=%2B5763470078&type=phone_number&app_absent=0',
 } as const

@@ -43,10 +43,6 @@ export default function AriaSaluda({
     const raiz = caja.current;
     if (!raiz) return;
 
-    // Con "reducir movimiento" activado se queda en la pose del diseño, que ya
-    // es un saludo. No hay nada que compensar.
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
     const antebrazo = raiz.querySelector("#aria-antebrazo");
     if (!antebrazo) return;
 

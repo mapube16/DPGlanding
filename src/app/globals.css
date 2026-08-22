@@ -183,12 +183,10 @@ svg {
 .btn--blue {
   background: var(--azul-claro);
   color: var(--cream);
-  box-shadow: 0 10px 24px rgba(24, 153, 214, 0.32);
 }
 .btn--green {
   background: var(--verde-oscuro);
   color: var(--cream);
-  box-shadow: 0 10px 24px rgba(83, 143, 50, 0.32);
 }
 .btn--ghost-blue {
   background: transparent;

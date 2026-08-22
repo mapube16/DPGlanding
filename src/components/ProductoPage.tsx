@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Breadcrumbs from './Breadcrumbs'
 import CtaLink from './CtaLink'
+import ModalAseguradora from './ModalAseguradora'
 import Badge from './Badge'
 import JsonLd from './JsonLd'
 import Contacto from './Contacto'
@@ -36,9 +37,19 @@ export default function ProductoPage({ product }: { product: Product }) {
           {/* Primera frase con la keyword: responde la intención de inmediato. */}
           <p className={s.intro}>{product.intro}</p>
           <div className={s.cta}>
-            <CtaLink className={`btn ${product.accent === 'green' ? 'btn--green' : 'btn--blue'}`} href={product.buyUrl}>
-              Comprar en línea
-            </CtaLink>
+            {product.compra ? (
+              <ModalAseguradora
+                className={`btn ${product.accent === 'green' ? 'btn--green' : 'btn--blue'}`}
+                sura={product.compra.sura}
+                sbs={product.compra.sbs}
+              >
+                Comprar en línea
+              </ModalAseguradora>
+            ) : (
+              <CtaLink className={`btn ${product.accent === 'green' ? 'btn--green' : 'btn--blue'}`} href={product.buyUrl}>
+                Comprar en línea
+              </CtaLink>
+            )}
             <CtaLink
               className={`btn ${product.accent === 'green' ? 'btn--ghost-green' : 'btn--ghost-blue'}`}
               href={product.quoteUrl}

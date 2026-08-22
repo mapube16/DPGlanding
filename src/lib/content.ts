@@ -15,6 +15,8 @@ export type Product = {
   intro: string
   bullets: string[]
   buyUrl: string
+  /** Productos que se venden con dos aseguradoras: el botón Comprar abre el modal. */
+  compra?: { sura: string; sbs: string }
   quoteUrl: string
   faqs: { q: string; a: string }[]
 }
@@ -85,6 +87,7 @@ export const PRODUCTS: Product[] = [
       'Estudio del candidato en 24 horas hábiles en la mayoría de casos.',
     ],
     buyUrl: SBS_ARRENDAMIENTO,
+    compra: { sura: SURA_ARRENDAMIENTO, sbs: SBS_ARRENDAMIENTO },
     quoteUrl: SURA_ARRENDAMIENTO,
     faqs: [
       {

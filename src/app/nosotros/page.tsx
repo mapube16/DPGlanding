@@ -29,7 +29,7 @@ export default function Page() {
         <header className={`wrap ${s.head}`}>
           <h1>{page.h1}</h1>
           <p className={s.intro}>
-            DPG Seguros es un corredor de seguros fundado en {NAP.city} en {NAP.foundingDate}. En{' '}
+            DPG Seguros es un corredor de seguros fundado en {NAP.city} en {NAP.foundingYear}. En{' '}
             {anios} años hemos acompañado a familias y empresas del Quindío y del resto de Colombia,
             no vendiendo la póliza más barata sino la que responde cuando pasa algo.
           </p>
@@ -55,7 +55,7 @@ export default function Page() {
             <dl className={s.datos}>
               <div>
                 <dt>Fundación</dt>
-                <dd>{NAP.foundingDate}, en {NAP.city}</dd>
+                <dd>{NAP.foundingYear}, en {NAP.city}</dd>
               </div>
               <div>
                 <dt>Experiencia</dt>

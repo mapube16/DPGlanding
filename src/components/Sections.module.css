@@ -1081,3 +1081,8 @@
     padding: 8px 14px;
   }
 }
+
+/* Testimonios (162:812): el título cabe en dos líneas con 474px, no en los 314 de Productos. */
+.testiHead h2 {
+  width: 474px;
+}

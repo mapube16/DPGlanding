@@ -22,7 +22,8 @@ export const metadata: Metadata = pageMetadata(PAGES.home)
 export default function Home() {
   return (
     <>
-      {/* AggregateRating solo cuando las reseñas sean reales y verificables. */}
+      {/* Las reseñas reales se cargan en el navegador (lib/resenas.ts); el schema
+          solo se emite cuando las de content.ts sean reales y verificables. */}
       {REVIEWS_SON_REALES && (
         <JsonLd
           data={reviewSchema(TESTIMONIOS.map((t) => ({ author: t.author, body: t.body, rating: t.rating })))}

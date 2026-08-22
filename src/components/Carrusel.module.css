@@ -171,3 +171,16 @@
     gap: 24px;
   }
 }
+
+/* Reseñas reales de Google: foto del autor (si la hay) y fecha relativa. */
+.foto {
+  flex: none;
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.fecha {
+  font-size: 13px;
+  color: rgba(22, 32, 37, 0.6);
+}

@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import CtaLink from './CtaLink'
+import ModalAseguradora from './ModalAseguradora'
 import Badge from './Badge'
 import Carrusel from './Carrusel'
 import BarraMensaje from './BarraMensaje'
@@ -43,7 +44,7 @@ export function Aria() {
         svg={leerSvg('img/aria/aria-asistente-virtual-dpg-seguros.svg')}
       />
 
-      <Link className={`${s.bubble} ${s.b1}`} href={PAGES.nosotros.path}>
+      <Link className={`${s.bubble} ${s.b1}`} href="#pilares">
         ¿Qué es DPG?
       </Link>
       <Link className={`${s.bubble} ${s.b2}`} href="#productos">
@@ -104,9 +105,15 @@ export function Productos() {
               <p>{p.short}</p>
               <hr className={s.cardRule} />
               <div className={s.cardActions}>
-                <CtaLink className={`btn ${p.accent === 'green' ? 'btn--green' : 'btn--blue'}`} href={p.buyUrl}>
-                  Comprar
-                </CtaLink>
+                {p.compra ? (
+                  <ModalAseguradora className={`btn ${p.accent === 'green' ? 'btn--green' : 'btn--blue'}`} sura={p.compra.sura} sbs={p.compra.sbs}>
+                    Comprar
+                  </ModalAseguradora>
+                ) : (
+                  <CtaLink className={`btn ${p.accent === 'green' ? 'btn--green' : 'btn--blue'}`} href={p.buyUrl}>
+                    Comprar
+                  </CtaLink>
+                )}
                 <CtaLink className={`btn ${p.accent === 'green' ? 'btn--ghost-green' : 'btn--ghost-blue'}`} href={p.quoteUrl}>
                   Cotizar
                 </CtaLink>
@@ -286,14 +293,18 @@ export function Testimonios() {
   return (
     <section className="section section--cream" id="testimonios">
       <div className="wrap">
-        <header className={s.prodHead}>
+        <header className={`${s.prodHead} ${s.testiHead}`}>
           <h2>Testimonios que hablan por nosotros</h2>
           <p>Personas que nos eligieron y hoy nos recomiendan, en sus propias palabras.</p>
         </header>
         <Carrusel />
         <p className={s.gbpLink}>
           <a href={NAP.googleBusinessUrl} target="_blank" rel="noopener noreferrer">
-            Leer las reseñas de DPG Seguros en Google Armenia
+            Leer todas las reseñas en Google
+          </a>
+          {" · "}
+          <a href={NAP.googleWriteReviewUrl} target="_blank" rel="noopener noreferrer">
+            Escribir una reseña
           </a>
         </p>
       </div>

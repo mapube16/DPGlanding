@@ -82,7 +82,7 @@ export default function Pilares() {
                   <p style={{ width: p.ancho }}>{p.text}</p>
                 </div>
                 {p.metrica === 'contador' ? (
-                  <TiempoCreciendo desde={`${NAP.foundingDate}-01-01`} />
+                  <TiempoCreciendo desde={NAP.foundingDate} />
                 ) : (
                   <p className={s.contador}>
                     <span>

@@ -126,7 +126,10 @@ export function serviceSchema(page: PageMeta, faqs?: { q: string; a: string }[])
 }
 
 // AggregateRating solo si las reseñas son reales y verificables (política de Google).
-export function reviewSchema(reviews: { author: string; body: string; rating: number }[]): Json {
+export function reviewSchema(
+  reviews: { author: string; body: string; rating: number }[],
+  agregado?: { ratingValue: number; reviewCount: number },
+): Json {
   return {
     '@context': 'https://schema.org',
     '@type': 'InsuranceAgency',
@@ -134,8 +137,9 @@ export function reviewSchema(reviews: { author: string; body: string; rating: nu
     name: NAP.name,
     aggregateRating: {
       '@type': 'AggregateRating',
-      ratingValue: (reviews.reduce((s, r) => s + r.rating, 0) / reviews.length).toFixed(1),
-      reviewCount: reviews.length,
+      // Con Google a mano se usa su promedio y total reales, no solo las 5 visibles.
+      ratingValue: (agregado?.ratingValue ?? reviews.reduce((s, r) => s + r.rating, 0) / reviews.length).toFixed(1),
+      reviewCount: agregado?.reviewCount ?? reviews.length,
       bestRating: 5,
     },
     review: reviews.map((r) => ({
