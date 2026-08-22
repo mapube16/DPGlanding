@@ -1210,4 +1210,12 @@
   .tab {
     padding: 8px min(4.67vw, 20px);
   }
+  /* El remate del titular va en una línea en escritorio; en móvil tiene que
+     poder partirse o se sale de la pantalla ("anticipar los problemas"). */
+  .claims {
+    max-width: 100%;
+  }
+  .claim {
+    white-space: normal;
+  }
 }
