@@ -176,3 +176,20 @@
     font-size: 18px;
   }
 }
+
+/* Móvil 1:1 con 'Hero sky mobile' (196:412, 428x926): título de ~62px en cuatro
+   líneas y el paisaje más grande, apoyado en el borde inferior. */
+@media (max-width: 700px) {
+  .content h1 {
+    font-size: clamp(44px, 14.5vw, 62px);
+  }
+  .lead {
+    font-size: 20px;
+    width: 356px;
+  }
+  .paisaje {
+    top: auto;
+    bottom: 0;
+    min-width: 1100px;
+  }
+}

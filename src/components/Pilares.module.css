@@ -284,3 +284,13 @@
     font-size: 56px;
   }
 }
+
+/* Móvil (200:3236): título de ~52px y cifras de 72px. */
+@media (max-width: 760px) {
+  .head h2 {
+    font-size: clamp(44px, 12vw, 58px);
+  }
+  .contador strong {
+    font-size: 72px;
+  }
+}

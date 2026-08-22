@@ -216,3 +216,29 @@
     border-width: 2px;
   }
 }
+
+/* Móvil (196:3087): texto arriba; el anillo de 938px va centrado debajo y la
+   sección (1036px) lo recorta por abajo, como en el diseño. */
+@media (max-width: 760px) {
+  .aliados {
+    display: block;
+    height: 1036px;
+    min-height: 0;
+    padding: 90px 0 0;
+  }
+  .col {
+    width: 100%;
+  }
+  .col h2 {
+    font-size: 52px;
+  }
+  .ring {
+    position: absolute;
+    left: 50%;
+    right: auto;
+    top: 533px;
+    width: 938px;
+    margin: 0;
+    transform: translateX(-50%);
+  }
+}

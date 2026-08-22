@@ -133,3 +133,42 @@
     align-items: flex-start;
   }
 }
+
+/* Móvil (202:4370): logo y enlaces centrados. El NAP se mantiene (SEO local),
+   compacto y centrado. */
+@media (max-width: 760px) {
+  .footer {
+    padding-top: 36px;
+  }
+  .inner {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 28px;
+  }
+  .brand p,
+  .gbp,
+  .col h2 {
+    display: none;
+  }
+  .col ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px 24px;
+  }
+  .contacto {
+    align-items: center;
+  }
+  .dato {
+    justify-content: center;
+  }
+}
+@media (max-width: 760px) {
+  /* En columna, el flex-basis de 220px se vuelve ALTURA y dejaba huecos. */
+  .brand,
+  .col {
+    flex: none;
+    width: 100%;
+  }
+}

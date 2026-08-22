@@ -251,3 +251,10 @@ svg {
     max-width: none;
   }
 }
+
+/* Móvil (Figma 196:349, 428px): márgenes laterales de 36px, no 24. */
+@media (max-width: 760px) {
+  .wrap {
+    width: calc(100% - 72px);
+  }
+}

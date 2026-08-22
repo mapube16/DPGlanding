@@ -13,16 +13,16 @@ import { NAP, SITE_URL, PAGES } from '@/lib/site'
 // cero CSS bloqueante, que es lo que castiga PageSpeed.
 const encode = Encode_Sans_Expanded({
   subsets: ['latin'],
-  weight: ['400', '500', '700'],
+  weight: ['300', '400', '500', '600', '700'], // el CSS usa 300 y 600 (botones SemiBold del Figma)
   display: 'swap',
   variable: '--font-encode',
 })
 
+// Los títulos del Figma usan 'Qlassik_Bold:Regular', o sea el archivo Bold. Se
+// registra como peso 400 para que h1-h4 (font-weight 400) lo tomen tal cual;
+// el corte Regular (Qlassik_TB.otf) no aparece en el diseño.
 const qlassik = localFont({
-  src: [
-    { path: '../fonts/Qlassik_TB.otf', weight: '400', style: 'normal' },
-    { path: '../fonts/QlassikBold_TB.otf', weight: '700', style: 'normal' },
-  ],
+  src: [{ path: '../fonts/QlassikBold_TB.otf', weight: '400', style: 'normal' }],
   display: 'swap',
   variable: '--font-qlassik',
 })

@@ -1086,3 +1086,151 @@
 .testiHead h2 {
   width: 474px;
 }
+
+/* ====================== Móvil 1:1 con el Figma (frame 196:349, 428px) ====================== */
+@media (max-width: 760px) {
+  /* Sobre Aria (196:1762): texto arriba; Aria y las burbujas en las posiciones
+     del diseño móvil, recortadas por la sección de 926px. */
+  .aria {
+    display: block;
+    height: 926px;
+    min-height: 0;
+    padding: 90px 0 0;
+  }
+  .ariaCol {
+    width: 100%;
+    gap: 36px;
+  }
+  .ariaTitle {
+    font-size: 52px;
+    white-space: normal;
+  }
+  .ariaGlow {
+    display: none;
+  }
+  .ariaArt {
+    right: auto;
+    left: 25px;
+    top: 391px;
+    width: 433px;
+  }
+  .b2 {
+    right: auto;
+    left: 36px;
+    top: 505px;
+  }
+  .b1 {
+    right: auto;
+    left: 245px;
+    top: 631px;
+  }
+  .b3 {
+    right: auto;
+    left: 71px;
+    top: 793px;
+  }
+  .bubble {
+    font-size: 16px;
+    padding: 6px 20px;
+  }
+
+  /* Productos (196:2689): cabecera apilada, tarjetas en carrusel horizontal y
+     banner centrado. */
+  .prodHead {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+  .prodHead h2 {
+    width: auto;
+    font-size: 52px;
+  }
+  .prodHead p {
+    width: auto;
+    text-align: left;
+  }
+  .cards {
+    justify-content: flex-start;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 36px;
+    padding-bottom: 12px;
+    scrollbar-width: none;
+  }
+  .cards::-webkit-scrollbar {
+    display: none;
+  }
+  .card {
+    scroll-snap-align: start;
+  }
+  .banner {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 28px;
+    padding: 44px 30px;
+  }
+  .banner p {
+    width: auto;
+  }
+
+  /* Asesoría (196:2775): texto arriba; la escena (marco a 0.553) abajo, recortada. */
+  .asesoria {
+    display: block;
+    height: 926px;
+    min-height: 0;
+    padding: 90px 0 0;
+  }
+  .asesoriaCol {
+    width: 100%;
+    gap: 36px;
+  }
+  .asesoriaCol h2 {
+    width: auto;
+    font-size: 56px;
+  }
+  .asesoriaArt {
+    right: auto;
+    left: -64px;
+    top: 604px;
+    width: 508px;
+  }
+
+  /* Por qué DPG (200:3322): sección de 926px y fantasma más pequeño. */
+  .porque {
+    min-height: 926px;
+  }
+  .ghost {
+    font-size: clamp(80px, 21.5vw, 310px);
+  }
+
+  /* Redes (200:3345): texto arriba y la tira de reels debajo, a lo ancho. */
+  .redes {
+    display: block;
+    height: 926px;
+    min-height: 0;
+    padding: 90px 0 0;
+  }
+  .redesCol {
+    width: 100%;
+    gap: 36px;
+  }
+  .redesCol h2 {
+    font-size: 52px;
+  }
+  .marquesina {
+    left: 0;
+    right: 0;
+    top: 583px;
+  }
+  .reels li {
+    width: 212px;
+    height: 282px;
+  }
+
+  /* Testimonios (202:3490) */
+  .testiHead h2 {
+    width: auto;
+    font-size: 44px;
+  }
+}
