@@ -9,6 +9,7 @@ import Contacto from './Contacto'
 import { serviceSchema } from '@/lib/seo'
 import { PAGES, BRAND, NAP } from '@/lib/site'
 import { PRODUCTS, type Product } from '@/lib/content'
+import { leerSvg } from '@/lib/svg'
 import s from './ProductoPage.module.css'
 
 // Plantilla única para los tres productos: mismo esqueleto semántico, un solo
@@ -125,7 +126,7 @@ export default function ProductoPage({ product }: { product: Product }) {
         </section>
       </article>
 
-      <Contacto />
+      <Contacto svgAsesor={leerSvg('img/aria/aria-contacto-asesor-seguros.svg')} />
     </>
   )
 }

@@ -7,6 +7,7 @@ import Aliados from '@/components/Aliados'
 import { pageMetadata, serviceSchema } from '@/lib/seo'
 import { PAGES, BRAND, NAP } from '@/lib/site'
 import { PRODUCTS } from '@/lib/content'
+import { leerSvg } from '@/lib/svg'
 import s from './page.module.css'
 
 const page = PAGES.asesoria
@@ -69,7 +70,7 @@ export default function Page() {
         <Aliados />
       </article>
 
-      <Contacto />
+      <Contacto svgAsesor={leerSvg('img/aria/aria-contacto-asesor-seguros.svg')} />
     </>
   )
 }

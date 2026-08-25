@@ -50,13 +50,16 @@
   height: 147px;
 }
 /* La ilustración va ampliada y anclada arriba para que se vea el rostro. */
-.avatar img {
+.avatar svg {
   position: absolute;
   left: -2.5%;
   top: 4%;
   width: 130%;
   height: auto;
   max-width: none;
+}
+.bocaSuperpuesta {
+  opacity: 0;
 }
 
 /* Los dos puntos que unen avatar y burbuja (Ellipse 4 y 5). */

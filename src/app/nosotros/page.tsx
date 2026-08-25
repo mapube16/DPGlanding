@@ -8,6 +8,7 @@ import { PorQue, Redes } from '@/components/Sections'
 import { pageMetadata } from '@/lib/seo'
 import { PAGES, NAP, BRAND } from '@/lib/site'
 import { PRODUCTS, SME } from '@/lib/content'
+import { leerSvg } from '@/lib/svg'
 import s from './page.module.css'
 
 const page = PAGES.nosotros
@@ -123,7 +124,7 @@ export default function Page() {
         <Redes />
       </article>
 
-      <Contacto />
+      <Contacto svgAsesor={leerSvg('img/aria/aria-contacto-asesor-seguros.svg')} />
     </>
   )
 }

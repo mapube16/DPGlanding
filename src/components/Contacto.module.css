@@ -51,6 +51,13 @@
   max-width: 515px;
   height: auto;
 }
+/* El SVG va incrustado (ojos siguiendo el cursor), no como <img>: sin
+   width/height propios, escala con el viewBox igual que lo hacía la imagen. */
+.art svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
 
 /* --- Tarjeta del formulario --- */
 .form {

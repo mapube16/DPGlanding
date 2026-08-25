@@ -16,6 +16,7 @@ import {
 import { pageMetadata, reviewSchema } from '@/lib/seo'
 import { PAGES } from '@/lib/site'
 import { TESTIMONIOS, REVIEWS_SON_REALES } from '@/lib/content'
+import { leerSvg } from '@/lib/svg'
 
 export const metadata: Metadata = pageMetadata(PAGES.home)
 
@@ -40,8 +41,11 @@ export default function Home() {
       <PorQue />
       <Redes />
       <Testimonios />
-      <Contacto />
-      <AriaFlotante />
+      <Contacto svgAsesor={leerSvg('img/aria/aria-contacto-asesor-seguros.svg')} />
+      <AriaFlotante
+        svgAbierta={leerSvg('img/aria/aria-dpg-seguros.svg')}
+        svgCerrada={leerSvg('img/aria/aria-dpg-seguros-sonrisa.svg')}
+      />
     </>
   )
 }

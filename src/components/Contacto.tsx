@@ -1,17 +1,83 @@
 'use client'
 
-import { useState } from 'react'
-import Image from 'next/image'
+import { useEffect, useRef, useState } from 'react'
+import gsap from 'gsap'
 import { NAP } from '@/lib/site'
 import s from './Contacto.module.css'
 
 const ENDPOINT = process.env.NEXT_PUBLIC_FORM_ENDPOINT
 
+// Los ojos de la asesora siguen el cursor, igual que en AriaSaluda (sección
+// "Hola, soy Aria"): el SVG llega con #aria-ojo-izq/#aria-ojo-der ya
+// preparados a mano en el archivo fuente (ver public/img/aria/aria-contacto-
+// asesor-seguros.svg), y aquí solo se traslada el iris hacia el mouse.
+const ANCHO_VIEWBOX = 885
+const RADIO_OJO = 7
+
 type Estado = 'idle' | 'enviando' | 'ok' | 'error'
 
-export default function Contacto() {
+export default function Contacto({ svgAsesor }: { svgAsesor: string }) {
   const [estado, setEstado] = useState<Estado>('idle')
   const [error, setError] = useState('')
+  const arte = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const raiz = arte.current
+    if (!raiz) return
+
+    const svgEl = raiz.querySelector<SVGSVGElement>('svg')
+    const ojoIzq = raiz.querySelector<SVGGElement>('#aria-ojo-izq')
+    const ojoDer = raiz.querySelector<SVGGElement>('#aria-ojo-der')
+    if (!svgEl || !ojoIzq || !ojoDer) return
+
+    const cajaIzq = ojoIzq.getBBox()
+    const cajaDer = ojoDer.getBBox()
+    const centroCara = {
+      x: (cajaIzq.x + cajaIzq.width / 2 + cajaDer.x + cajaDer.width / 2) / 2,
+      y: (cajaIzq.y + cajaIzq.height / 2 + cajaDer.y + cajaDer.height / 2) / 2,
+    }
+
+    const moverOjosX = gsap.quickTo([ojoIzq, ojoDer], 'x', { duration: 0.35, ease: 'power3' })
+    const moverOjosY = gsap.quickTo([ojoIzq, ojoDer], 'y', { duration: 0.35, ease: 'power3' })
+
+    const alMoverMouse = (evento: MouseEvent) => {
+      const rectSvg = svgEl.getBoundingClientRect()
+      if (rectSvg.width === 0) return
+      const escala = ANCHO_VIEWBOX / rectSvg.width
+      const mouseX = (evento.clientX - rectSvg.left) * escala
+      const mouseY = (evento.clientY - rectSvg.top) * escala
+      const dx = mouseX - centroCara.x
+      const dy = mouseY - centroCara.y
+      const distancia = Math.hypot(dx, dy)
+
+      if (distancia < 1) {
+        moverOjosX(0)
+        moverOjosY(0)
+        return
+      }
+      moverOjosX((dx / distancia) * RADIO_OJO)
+      moverOjosY((dy / distancia) * RADIO_OJO)
+    }
+
+    const io = new IntersectionObserver(
+      ([entrada]) => {
+        if (entrada.isIntersecting) {
+          window.addEventListener('mousemove', alMoverMouse)
+        } else {
+          window.removeEventListener('mousemove', alMoverMouse)
+          gsap.to([ojoIzq, ojoDer], { x: 0, y: 0, duration: 0.3, ease: 'power2.out' })
+        }
+      },
+      { threshold: 0.3 },
+    )
+    io.observe(raiz)
+
+    return () => {
+      io.disconnect()
+      window.removeEventListener('mousemove', alMoverMouse)
+      gsap.set([ojoIzq, ojoDer], { x: 0, y: 0 })
+    }
+  }, [])
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -69,13 +135,12 @@ export default function Contacto() {
               {NAP.street}, {NAP.city}
             </a>
           </p>
-          <Image
+          <div
+            ref={arte}
             className={s.art}
-            src="/img/aria/aria-contacto-asesor-seguros.svg"
-            alt="Asesora de DPG Seguros atendiendo una llamada de un cliente"
-            width={515}
-            height={566}
-            loading="lazy"
+            role="img"
+            aria-label="Asesora de DPG Seguros atendiendo una llamada de un cliente"
+            dangerouslySetInnerHTML={{ __html: svgAsesor }}
           />
         </div>
 
