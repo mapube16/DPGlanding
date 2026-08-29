@@ -421,7 +421,9 @@
   z-index: 1;
   pointer-events: none;
 }
-.asesoriaArt img {
+/* El SVG va incrustado (AriaAsesora), no como <img>. */
+.asesoriaArt img,
+.asesoriaArt svg {
   width: 100%;
   height: auto;
   display: block;

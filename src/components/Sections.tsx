@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import Image from 'next/image'
 import CtaLink from './CtaLink'
 import ModalAseguradora from './ModalAseguradora'
 import Badge from './Badge'
@@ -7,6 +6,7 @@ import Carrusel from './Carrusel'
 import BarraMensaje from './BarraMensaje'
 import AutoCiclo from './AutoCiclo'
 import AriaSaluda from './AriaSaluda'
+import AriaAsesora from './AriaAsesora'
 import { leerSvg } from '@/lib/svg'
 import { PAGES, NAP, BRAND } from '@/lib/site'
 import { PRODUCTS, RAZONES, type Product } from '@/lib/content'
@@ -145,15 +145,13 @@ export function Productos() {
 export function Asesoria() {
   return (
     <section className={s.asesoria} id="asesoria">
-      <div className={s.asesoriaArt}>
-        <Image
-          src="/img/aria/aria-asesoria-personalizada-seguros.svg"
-          alt="Asesora de DPG Seguros explicando una póliza a un cliente en Armenia"
-          width={1292}
-          height={905}
-          loading="lazy"
-        />
-      </div>
+      {/* SVG incrustado (no <img>) para que GSAP pueda guiñarle el ojo al
+          entrar la sección. Se lee en build, así que sigue en el HTML. */}
+      <AriaAsesora
+        className={s.asesoriaArt}
+        etiqueta="Asesora de DPG Seguros explicando una póliza a un cliente en Armenia"
+        svg={leerSvg('img/aria/aria-asesoria-personalizada-seguros.svg')}
+      />
       <div className="wrap">
         <div className={s.asesoriaCol}>
           <h2>El mejor seguro es el que de verdad es tuyo</h2>
