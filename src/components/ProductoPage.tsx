@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import Image from 'next/image'
 import Breadcrumbs from './Breadcrumbs'
 import CtaLink from './CtaLink'
 import ModalAseguradora from './ModalAseguradora'
@@ -62,9 +61,9 @@ export default function ProductoPage({ product }: { product: Product }) {
           </p>
         </header>
 
-        <section className="section section--cream">
+        <section className={`section section--cream ${s.cubre}`}>
           <div className="wrap">
-            <h2 className={s.h2}>Qué cubre este amparo</h2>
+            <h2 className={s.h2}>¿Qué cubre?</h2>
             <ul className={s.bullets}>
               {product.bullets.map((b) => (
                 <li key={b}>{b}</li>
@@ -78,27 +77,6 @@ export default function ProductoPage({ product }: { product: Product }) {
           </div>
         </section>
 
-        <section className="section section--navy">
-          <div className={`wrap ${s.porqueDpg}`}>
-            <div>
-              <h2 className={s.h2Light}>¿Por qué comprarlo con un corredor y no directo?</h2>
-              <p>
-                Porque la prima es la misma y el acompañamiento no. Somos{' '}
-                <Link href={PAGES.nosotros.path}>un corredor de seguros con sede en Armenia</Link>{' '}
-                desde 1998: comparamos por ti, te explicamos las exclusiones antes de firmar y, si
-                pasa algo, presentamos la reclamación de tu lado.
-              </p>
-            </div>
-            <Image
-              src="/img/aria/aria-asesoria-personalizada-seguros.svg"
-              alt={`Asesora de DPG Seguros explicando el ${page.keyword} a un cliente`}
-              width={1097}
-              height={776}
-              loading="lazy"
-              className={s.art}
-            />
-          </div>
-        </section>
 
         <section className="section section--cream">
           <div className="wrap">
