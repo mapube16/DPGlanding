@@ -90,9 +90,12 @@ export function Productos() {
           </p>
         </header>
 
+        {/* La máscara de las muescas recorta también la sombra, así que la sombra
+            vive en el <li> y la máscara en el div de dentro. */}
         <ul className={s.cards}>
           {PRODUCTS.map((p) => (
-            <li key={p.key} className={`${s.card} ${s[p.accent]}`}>
+            <li key={p.key} className={s.cardWrap}>
+              <div className={`${s.card} ${s[p.accent]}`}>
               <svg className={s.icon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 {ICONS[p.icon]}
               </svg>
@@ -117,6 +120,7 @@ export function Productos() {
                 <Link className={`btn ${p.accent === 'green' ? 'btn--ghost-green' : 'btn--ghost-blue'}`} href="/#contacto">
                   Cotizar
                 </Link>
+                </div>
               </div>
             </li>
           ))}
@@ -172,7 +176,7 @@ export function Asesoria() {
 export function PorQue() {
   return (
     <section className={s.porque} id="por-que-dpg">
-      <AutoCiclo name="razon" seccion="por-que-dpg" intervalo={1500} />
+      <AutoCiclo name="razon" seccion="por-que-dpg" intervalo={6000} />
       {RAZONES.map((r, i) => (
         <input
           key={`r-${r.key}`}
@@ -192,17 +196,17 @@ export function PorQue() {
       ))}
 
       <div className={`wrap ${s.porqueInner}`}>
-        {/* Un solo H2: lo único que cambia por pestaña es el remate, así que se
-            alternan los <em> en vez de duplicar seis encabezados iguales. */}
+        {/* Un solo H2 con las seis variantes apiladas. Cada una repite "DPG es"
+            para que la línea completa se centre sola: con el remate suelto, el
+            hueco tras "DPG es" cambiaba según lo largo que fuera. */}
         <h2 className={s.porqueTitle}>
           <span className={s.l1}>Más que una póliza,</span>
           <span className={s.l2}>
-            DPG es{' '}
             <span className={s.claims}>
               {RAZONES.map((r) => (
-                <em key={r.key} className={`${s.claim} ${s[r.acento]}`}>
-                  {r.claim}
-                </em>
+                <span key={r.key} className={`${s.claimLinea} ${s[r.acento]}`}>
+                  DPG es <em className={s.claim}>{r.claim}</em>
+                </span>
               ))}
             </span>
           </span>

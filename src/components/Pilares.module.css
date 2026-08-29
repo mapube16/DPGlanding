@@ -287,8 +287,10 @@
 
 /* Móvil (200:3236): título de ~52px y cifras de 72px. */
 @media (max-width: 760px) {
+  /* 13.1vw es lo máximo con lo que "nuestra promesa" cabe en una línea: el
+     título tiene que quedar en dos, como en el diseño. */
   .head h2 {
-    font-size: 58px;
+    font-size: min(13.1vw, 58px);
   }
   .contador strong {
     font-size: 72px;

@@ -200,10 +200,16 @@
 }
 
 /* Tarjeta tipo ticket: la muesca del diseño es una máscara, no un borde. */
+/* La sombra vive aquí: sobre .card la recortaría la máscara de las muescas. */
+.cardWrap {
+  flex: none;
+  list-style: none;
+  filter: drop-shadow(0 6px 14px rgba(18, 80, 119, 0.18));
+}
+
 .card {
   width: 324px;
   min-height: 453px;
-  flex: none;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -211,18 +217,18 @@
   gap: 28px;
   padding: 30px;
   border-radius: 40px;
-  box-shadow: 0 4px 11.9px rgba(18, 80, 119, 0.14);
   background:
     radial-gradient(120% 46% at 50% 0%, rgba(24, 153, 214, 0.15) 0%, rgba(24, 153, 214, 0) 100%),
     #fff;
-  --notch: radial-gradient(circle 13px at 0 50%, transparent 98%, #000 100%),
-    radial-gradient(circle 13px at 100% 50%, transparent 98%, #000 100%);
+  /* Las muescas van a la altura de la línea punteada (nodo 256:646: y=345.5 de
+     453 = 76%). El desplazamiento va DENTRO del degradado: mask-position en %
+     no mueve nada cuando la máscara mide lo mismo que el elemento. */
+  --notch: radial-gradient(circle 13px at 0 76%, transparent 98%, #000 100%),
+    radial-gradient(circle 13px at 100% 76%, transparent 98%, #000 100%);
   -webkit-mask-image: var(--notch);
   mask-image: var(--notch);
   -webkit-mask-composite: source-in;
   mask-composite: intersect;
-  mask-position: 0 66%, 0 66%;
-  -webkit-mask-position: 0 66%, 0 66%;
 }
 .card.green {
   background:
@@ -354,8 +360,11 @@
   line-height: 1.45;
   color: var(--cream);
 }
-.banner .btn {
+/* :global porque .btn es una clase global: dentro del módulo se renombraría y
+   la regla no aplicaba, así que el blob difuminado tapaba el botón. */
+.banner :global(.btn) {
   position: relative;
+  z-index: 1;
   flex: none;
 }
 
@@ -454,7 +463,7 @@
 .ghost {
   opacity: 0;
   visibility: hidden;
-  transition: opacity 260ms cubic-bezier(0.4, 0, 0.2, 1), visibility 260ms;
+  transition: opacity 320ms cubic-bezier(0.4, 0, 0.2, 1), visibility 320ms;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -489,7 +498,7 @@
   margin: 0;
 }
 .porqueTitle .l2 {
-  transition: color 520ms cubic-bezier(0.4, 0, 0.2, 1) 260ms;
+  transition: color 480ms cubic-bezier(0.4, 0, 0.2, 1) 320ms;
 }
 .porqueTitle .l1 {
   display: block;
@@ -517,25 +526,27 @@
   color: var(--carbon);
   opacity: 0;
   visibility: hidden;
-  transition: opacity 240ms cubic-bezier(0.4, 0, 0.2, 1), visibility 240ms;
+  transition: opacity 320ms cubic-bezier(0.4, 0, 0.2, 1), visibility 320ms;
 }
 
 /* Igual con el remate del titular. */
 .claims {
-  display: inline-grid;
+  display: grid;
   justify-items: center;
-  vertical-align: bottom;
+}
+.claimLinea {
+  grid-area: 1 / 1;
+  color: var(--yale);
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 320ms cubic-bezier(0.4, 0, 0.2, 1), visibility 320ms;
 }
 .claim {
-  grid-area: 1 / 1;
   font-style: normal;
   color: var(--acento);
   text-decoration: underline;
   text-underline-position: from-font;
-  white-space: nowrap;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 240ms cubic-bezier(0.4, 0, 0.2, 1), visibility 240ms;
 }
 
 .pqRadio {
@@ -546,10 +557,10 @@
 
 .pqRadio:nth-of-type(1):checked ~ .ghost:nth-of-type(1),
 .pqRadio:nth-of-type(1):checked ~ .porqueInner .leads .porqueLead:nth-of-type(1),
-.pqRadio:nth-of-type(1):checked ~ .porqueInner .claims .claim:nth-of-type(1) {
+.pqRadio:nth-of-type(1):checked ~ .porqueInner .claims .claimLinea:nth-of-type(1) {
   opacity: 1;
   visibility: visible;
-  transition: opacity 520ms cubic-bezier(0.4, 0, 0.2, 1) 260ms, visibility 0s;
+  transition: opacity 480ms cubic-bezier(0.4, 0, 0.2, 1) 320ms, visibility 0s;
 }
 .pqRadio:nth-of-type(1):checked ~ .porqueInner .tabs .tab:nth-of-type(1) {
   background: var(--acento-suave);
@@ -558,10 +569,10 @@
 }
 .pqRadio:nth-of-type(2):checked ~ .ghost:nth-of-type(2),
 .pqRadio:nth-of-type(2):checked ~ .porqueInner .leads .porqueLead:nth-of-type(2),
-.pqRadio:nth-of-type(2):checked ~ .porqueInner .claims .claim:nth-of-type(2) {
+.pqRadio:nth-of-type(2):checked ~ .porqueInner .claims .claimLinea:nth-of-type(2) {
   opacity: 1;
   visibility: visible;
-  transition: opacity 520ms cubic-bezier(0.4, 0, 0.2, 1) 260ms, visibility 0s;
+  transition: opacity 480ms cubic-bezier(0.4, 0, 0.2, 1) 320ms, visibility 0s;
 }
 .pqRadio:nth-of-type(2):checked ~ .porqueInner .tabs .tab:nth-of-type(2) {
   background: var(--acento-suave);
@@ -570,10 +581,10 @@
 }
 .pqRadio:nth-of-type(3):checked ~ .ghost:nth-of-type(3),
 .pqRadio:nth-of-type(3):checked ~ .porqueInner .leads .porqueLead:nth-of-type(3),
-.pqRadio:nth-of-type(3):checked ~ .porqueInner .claims .claim:nth-of-type(3) {
+.pqRadio:nth-of-type(3):checked ~ .porqueInner .claims .claimLinea:nth-of-type(3) {
   opacity: 1;
   visibility: visible;
-  transition: opacity 520ms cubic-bezier(0.4, 0, 0.2, 1) 260ms, visibility 0s;
+  transition: opacity 480ms cubic-bezier(0.4, 0, 0.2, 1) 320ms, visibility 0s;
 }
 .pqRadio:nth-of-type(3):checked ~ .porqueInner .tabs .tab:nth-of-type(3) {
   background: var(--acento-suave);
@@ -582,10 +593,10 @@
 }
 .pqRadio:nth-of-type(4):checked ~ .ghost:nth-of-type(4),
 .pqRadio:nth-of-type(4):checked ~ .porqueInner .leads .porqueLead:nth-of-type(4),
-.pqRadio:nth-of-type(4):checked ~ .porqueInner .claims .claim:nth-of-type(4) {
+.pqRadio:nth-of-type(4):checked ~ .porqueInner .claims .claimLinea:nth-of-type(4) {
   opacity: 1;
   visibility: visible;
-  transition: opacity 520ms cubic-bezier(0.4, 0, 0.2, 1) 260ms, visibility 0s;
+  transition: opacity 480ms cubic-bezier(0.4, 0, 0.2, 1) 320ms, visibility 0s;
 }
 .pqRadio:nth-of-type(4):checked ~ .porqueInner .tabs .tab:nth-of-type(4) {
   background: var(--acento-suave);
@@ -594,10 +605,10 @@
 }
 .pqRadio:nth-of-type(5):checked ~ .ghost:nth-of-type(5),
 .pqRadio:nth-of-type(5):checked ~ .porqueInner .leads .porqueLead:nth-of-type(5),
-.pqRadio:nth-of-type(5):checked ~ .porqueInner .claims .claim:nth-of-type(5) {
+.pqRadio:nth-of-type(5):checked ~ .porqueInner .claims .claimLinea:nth-of-type(5) {
   opacity: 1;
   visibility: visible;
-  transition: opacity 520ms cubic-bezier(0.4, 0, 0.2, 1) 260ms, visibility 0s;
+  transition: opacity 480ms cubic-bezier(0.4, 0, 0.2, 1) 320ms, visibility 0s;
 }
 .pqRadio:nth-of-type(5):checked ~ .porqueInner .tabs .tab:nth-of-type(5) {
   background: var(--acento-suave);
@@ -606,10 +617,10 @@
 }
 .pqRadio:nth-of-type(6):checked ~ .ghost:nth-of-type(6),
 .pqRadio:nth-of-type(6):checked ~ .porqueInner .leads .porqueLead:nth-of-type(6),
-.pqRadio:nth-of-type(6):checked ~ .porqueInner .claims .claim:nth-of-type(6) {
+.pqRadio:nth-of-type(6):checked ~ .porqueInner .claims .claimLinea:nth-of-type(6) {
   opacity: 1;
   visibility: visible;
-  transition: opacity 520ms cubic-bezier(0.4, 0, 0.2, 1) 260ms, visibility 0s;
+  transition: opacity 480ms cubic-bezier(0.4, 0, 0.2, 1) 320ms, visibility 0s;
 }
 .pqRadio:nth-of-type(6):checked ~ .porqueInner .tabs .tab:nth-of-type(6) {
   background: var(--acento-suave);
@@ -1105,8 +1116,10 @@
   .cards::-webkit-scrollbar {
     display: none;
   }
-  .card {
+  .cardWrap {
     scroll-snap-align: start;
+  }
+  .card {
     width: min(75.7vw, 324px);
   }
   .banner {
@@ -1215,7 +1228,7 @@
   .claims {
     max-width: 100%;
   }
-  .claim {
+  .claimLinea {
     white-space: normal;
   }
 }

@@ -33,11 +33,12 @@
   opacity: 0.35;
   cursor: default;
 }
+/* Fuera del contenedor de tarjetas (en el diseño van en los márgenes). */
 .prev {
-  left: -24px;
+  left: -66px;
 }
 .next {
-  right: -24px;
+  right: -66px;
 }
 
 /* La pista es el scroller: funciona con rueda, gesto y teclado sin código. */
@@ -60,6 +61,8 @@
 
 .testi {
   flex: 0 0 250px;
+  /* Sin esto el nombre del autor ensanchaba la tarjeta y solo cabían 3. */
+  min-width: 0;
   scroll-snap-align: start;
   display: flex;
   flex-direction: column;
@@ -76,6 +79,10 @@
 .testi blockquote {
   position: relative;
   flex: 1;
+  /* Todas del mismo alto; si la reseña es larga, desplaza por dentro. */
+  max-height: 320px;
+  display: flex;
+  flex-direction: column;
   margin: 0;
   width: 250px;
   padding: 30px 30px 50px;
@@ -96,15 +103,17 @@
     #fff;
 }
 /* Cola de la burbuja: arranca a 25px del borde izquierdo. */
+/* Cola: solapa 4px con la burbuja (antes se veía despegada por el radio de la
+   esquina) y lleva la punta achaflanada para que no quede en pico. */
 .testi blockquote::after {
   content: '';
   position: absolute;
-  left: 25px;
-  bottom: -34px;
-  width: 0;
-  height: 0;
-  border-left: 44px solid #fff;
-  border-bottom: 34px solid transparent;
+  left: 40px;
+  bottom: -30px;
+  width: 44px;
+  height: 34px;
+  background: #fff;
+  clip-path: polygon(0 0, 100% 0, 16% 100%, 4% 90%, 0 70%);
 }
 .comilla {
   width: 40px;
@@ -116,6 +125,9 @@
 }
 .testi blockquote p {
   margin: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
   font-size: 18px;
   line-height: 1.45;
   color: var(--carbon);
@@ -149,7 +161,6 @@
   font-weight: 600;
   line-height: 1.45;
   color: var(--carbon);
-  white-space: nowrap;
 }
 .estrellas {
   display: flex;

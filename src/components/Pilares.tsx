@@ -39,7 +39,12 @@ export default function Pilares() {
     <section className={s.seccion} id="pilares">
       <div className="wrap">
         <header className={s.head}>
-          <h2>Tres letras: nuestra promesa</h2>
+          {/* Dos líneas fijas, como en el diseño: el salto no depende del ancho. */}
+          <h2>
+            Tres letras:
+            <br />
+            nuestra promesa
+          </h2>
           <p>DPG no es solo un nombre. Son tres pilares que sostienen todo lo que hacemos.</p>
         </header>
 

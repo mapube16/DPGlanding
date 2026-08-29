@@ -10,7 +10,6 @@
   padding: 14px 77px;
   background: rgba(247, 244, 236, 0.85);
   backdrop-filter: blur(23.3px);
-  -webkit-backdrop-filter: blur(23.3px);
 }
 
 .logo {

@@ -108,7 +108,6 @@
   border-radius: 40px;
   background: rgba(204, 221, 247, 0.85);
   backdrop-filter: blur(23.3px);
-  -webkit-backdrop-filter: blur(23.3px);
 }
 .burbuja p {
   margin: 0;
@@ -159,13 +158,13 @@
 
 @media (max-width: 780px) {
   .flotante {
-    right: 12px;
-    bottom: 12px;
+    right: 16px;
+    bottom: 16px;
     width: 64px;
     height: 64px;
   }
   .flotante.abierta {
-    width: calc(100vw - 24px);
+    width: calc(100vw - 32px);
     height: 118px;
   }
   .avatar {
