@@ -16,12 +16,14 @@ import gsap from 'gsap'
 const CENTRO_IZQ = '567 142'
 const CENTRO_DER = '644 142'
 
-// Un parpadeo humano dura entre 100 y 150 ms y se repite cada pocos segundos,
-// nunca a intervalos exactos: por eso el próximo se sortea cada vez.
+// Un parpadeo humano dura entre 100 y 150 ms. Lo dispara el scroll, así que lo
+// que se limita es cada cuánto puede repetirse: sin ese freno parpadearía en
+// cada píxel de desplazamiento. El margen se sortea para que no salga a ritmo
+// de metrónomo.
 const CIERRE = 0.07
 const APERTURA = 0.11
-const PAUSA_MIN = 2.6
-const PAUSA_MAX = 6.5
+const FRENO_MIN = 900
+const FRENO_MAX = 2200
 
 export default function AriaAsesora({
   svg,
@@ -52,23 +54,31 @@ export default function AriaAsesora({
         .to(ojos, { scaleY: 0.05, duration: CIERRE, ease: 'power2.in' })
         .to(ojos, { scaleY: 1, duration: APERTURA, ease: 'power2.out' })
 
-    let temporizador: ReturnType<typeof setTimeout> | undefined
-    const programar = () => {
-      const espera = PAUSA_MIN + Math.random() * (PAUSA_MAX - PAUSA_MIN)
-      temporizador = setTimeout(() => {
-        const linea = parpadeo()
-        // De vez en cuando dos seguidos: es lo que hace que no parezca un bucle.
-        if (Math.random() < 0.25) linea.add(parpadeo(), '+=0.12')
-        programar()
-      }, espera * 1000)
+    let ultimo = 0
+    let freno = 0
+
+    const alScroll = () => {
+      const ahora = performance.now()
+      if (ahora - ultimo < freno) return
+      ultimo = ahora
+      freno = FRENO_MIN + Math.random() * (FRENO_MAX - FRENO_MIN)
+      const linea = parpadeo()
+      // De vez en cuando dos seguidos: es lo que hace que no parezca un bucle.
+      if (Math.random() < 0.25) linea.add(parpadeo(), '+=0.12')
     }
 
-    // Solo mientras se la ve: parpadear fuera de pantalla no lo nota nadie y
-    // deja un temporizador corriendo de más.
+    // Solo se escucha el scroll mientras se la ve; al entrar parpadea una vez,
+    // que es el momento en que la persona la está mirando por primera vez.
     const io = new IntersectionObserver(
       ([entrada]) => {
-        clearTimeout(temporizador)
-        if (entrada.isIntersecting) programar()
+        if (entrada.isIntersecting) {
+          ultimo = 0
+          freno = 0
+          alScroll()
+          window.addEventListener('scroll', alScroll, { passive: true })
+        } else {
+          window.removeEventListener('scroll', alScroll)
+        }
       },
       { threshold: 0.3 },
     )
@@ -76,7 +86,7 @@ export default function AriaAsesora({
 
     return () => {
       io.disconnect()
-      clearTimeout(temporizador)
+      window.removeEventListener('scroll', alScroll)
       gsap.killTweensOf(ojos)
       gsap.set(ojos, { scaleY: 1 })
     }
