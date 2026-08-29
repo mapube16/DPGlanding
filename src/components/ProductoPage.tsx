@@ -29,7 +29,7 @@ export default function ProductoPage({ product }: { product: Product }) {
         ]}
       />
 
-      <article>
+      <article className={s.pagina}>
         <header className={`wrap ${s.head}`}>
           <h1>{page.h1}</h1>
           {/* Primera frase con la keyword: responde la intención de inmediato. */}
@@ -61,7 +61,7 @@ export default function ProductoPage({ product }: { product: Product }) {
           </p>
         </header>
 
-        <section className={`section section--cream ${s.cubre}`}>
+        <section className="section section--cream">
           <div className="wrap">
             <h2 className={s.h2}>¿Qué cubre?</h2>
             <ul className={s.bullets}>

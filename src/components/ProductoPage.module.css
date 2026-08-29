@@ -28,8 +28,12 @@
   font-weight: 700;
 }
 
-/* La cabecera ya deja aire abajo: sin esto se sumaban los 120px de .section. */
-.cubre {
+/* Ritmo propio: las secciones de esta página son cortas y con los 120px de
+   .section quedaban 240px de aire entre una y otra. */
+.pagina section {
+  padding-block: 56px;
+}
+.pagina section:first-of-type {
   padding-top: 8px;
 }
 
