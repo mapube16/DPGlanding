@@ -71,8 +71,8 @@ export default function ProductoPage({ product }: { product: Product }) {
             </ul>
             <p className={s.note}>
               Las coberturas exactas dependen del condicionado de la aseguradora emisora. Si tienes
-              dudas sobre alguna exclusión, <Link href={PAGES.asesoria.path}>pídenos una asesoría</Link>{' '}
-              antes de comprar: es gratuita y no te obliga a nada.
+              dudas sobre el producto puedes{' '}
+              <Link href={PAGES.asesoria.path}>solicitar una asesoría</Link>.
             </p>
           </div>
         </section>
@@ -92,7 +92,7 @@ export default function ProductoPage({ product }: { product: Product }) {
               ))}
               <li>
                 <h3>
-                  <Link href={PAGES.asesoria.path}>¿Necesitas otra cosa?</Link>
+                  <Link href={PAGES.asesoria.path}>¿Necesitas algo diferente?</Link>
                 </h3>
                 <p>
                   Cotizamos decenas de productos con más de {BRAND.insurersCount} aseguradoras.

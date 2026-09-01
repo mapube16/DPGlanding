@@ -104,11 +104,11 @@ export const PAGES: Record<string, PageMeta> = {
   },
   asesoria: {
     path: '/asesoria-en-seguros/',
-    title: 'Asesoría en seguros gratuita con un asesor humano | DPG Seguros',
-    h1: 'Asesoría en seguros hecha para tu caso',
+    title: 'Asesoría en seguros personalizada con un asesor humano | DPG Seguros',
+    h1: 'Asesoría en seguros pensada para tus necesidades',
     keyword: 'asesoría en seguros',
     description:
-      'Asesoría en seguros sin costo: un asesor humano revisa contigo qué necesitas y compara más de 27 aseguradoras antes de recomendarte una póliza.',
+      'Asesoría en seguros personalizada: te acompañamos a comparar alternativas entre más de 27 aseguradoras y encontrar la que mejor se adapta a tus necesidades.',
     priority: 0.9,
     changeFrequency: 'monthly',
     inSitemap: true,

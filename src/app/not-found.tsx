@@ -27,7 +27,7 @@ export default function NotFound() {
           </li>
         ))}
         <li>
-          <Link href={PAGES.asesoria.path}>Asesoría en seguros</Link> — gratuita y sin compromiso.
+          <Link href={PAGES.asesoria.path}>Asesoría en seguros</Link> con un asesor humano.
         </li>
         <li>
           <Link href={PAGES.nosotros.path}>Nosotros</Link> — quiénes somos y desde cuándo.

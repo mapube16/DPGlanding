@@ -76,9 +76,9 @@ export const PRODUCTS: Product[] = [
     badge: ['Con ', { label: 'SURA', url: SURA_ARRENDAMIENTO }, ' o ', { label: 'SBS', url: SBS_ARRENDAMIENTO }],
     accent: 'green',
     icon: 'home',
-    short: 'Protege el canon y tu inmueble: arrienda con respaldo y sin fiador.',
+    short: 'Arrienda con mayor respaldo y tranquilidad.',
     intro:
-      'Protege el ingreso que te genera tu inmueble. Si tu arrendatario deja de pagar, este seguro respalda el canon durante el tiempo pactado.',
+      'Protege el cumplimiento del canon de arrendamiento y brinda respaldo al propietario durante el contrato.',
     bullets: [
       'Canon de arrendamiento y sus reajustes',
       'Cuotas de administración (en propiedad horizontal)',
@@ -117,13 +117,12 @@ export const PRODUCTS: Product[] = [
     icon: 'gauge',
     short: 'Pagas solo por lo que manejas: cobertura completa a un costo justo.',
     intro:
-      'Si tu carro pasa más tiempo parqueado que rodando, una póliza tradicional te cobra kilómetros que nunca hiciste. El seguro por kilómetro cobra una base fija más el recorrido real, con la misma cobertura todo riesgo.',
+      'Ideal si usas poco el carro. Pagas una cuota fija mensual más el paquete de kilómetros que elijas, y solo cubres lo que realmente conduces.',
     bullets: [
-      'Tarifa base más el consumo real de kilómetros del periodo.',
-      'Misma cobertura todo riesgo: daños, pérdida total, hurto y responsabilidad civil.',
-      'Pensado para quien trabaja desde casa o usa el carro los fines de semana.',
-      'Medición del recorrido sin trámites presenciales.',
-      'Puedes cambiarte desde una póliza tradicional al vencimiento.',
+      'Accidentes de tránsito',
+      'Robo del vehículo',
+      'Daños al carro',
+      'Eventos de la naturaleza',
     ],
     buyUrl: SBS_KILOMETRO,
     quoteUrl: SBS_KILOMETRO,
